@@ -11,8 +11,32 @@ namespace MultiStegano.Utils
 {
     class WavUtils
     {
+        public static WavFile CreateWavFile(String filePath)
+        {
+            WavFile wavFile = new WavFile();
+            FileStream fsr = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            BinaryReader r = new BinaryReader(fsr);
+            wavFile.sGroupID = r.ReadChars(4);
+            wavFile.dwFileLength = r.ReadUInt32();
+            wavFile.sRiffType = r.ReadChars(4);
+            wavFile.sFChunkID = r.ReadChars(4);
+            wavFile.dwFChunkSize = r.ReadUInt32();
+            wavFile.wFormatTag = r.ReadUInt16();
+            wavFile.wChannels = r.ReadUInt16();
+            wavFile.dwSamplesPerSec = r.ReadUInt32();
+            wavFile.dwAvgBytesPerSec = r.ReadUInt32();
+            wavFile.wBlockAlign = r.ReadUInt16();
+            wavFile.wBitsPerSample = r.ReadUInt16();
+            wavFile.sDChunkID = r.ReadChars(4);
+            wavFile.dwDChunkSize = r.ReadUInt32();
+            wavFile.dataStartPos = (byte)r.BaseStream.Position;
+            r.Close();
+            fsr.Close();
+            return wavFile;
+        }
+
         // метод записи wav файла(просто копирование)
-        public void WriteWav(string oldpath, string path)
+        public static void WriteWav(string oldpath, string path)
         {
             FileStream fsr = new FileStream(oldpath, FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fsr);
@@ -38,7 +62,7 @@ namespace MultiStegano.Utils
         }
 
         // метод записи нового файла из потока, с записью туда сообщения
-        public void WriteFile(WavFile file, string oldpath, string path, string messageStr)
+        public static void WriteFile(WavFile file, string oldpath, string path, string messageStr)
         {
             byte DataPos = file.dataStartPos;
             byte[] source;
@@ -100,7 +124,7 @@ namespace MultiStegano.Utils
             }
         }
         // дешифратор сообщения
-        public string EncryptFile(WavFile file, string path)
+        public static string EncryptFile(WavFile file, string path)
         {
             byte DataPos = file.dataStartPos;
             byte[] source;
@@ -154,7 +178,7 @@ namespace MultiStegano.Utils
             return decodeMessage;
         }
 
-        public string Analyze(WavFile file1, WavFile file2, string path1, string path2)
+        public static string Analyze(WavFile file1, WavFile file2, string path1, string path2)
         {
             byte DataPos1 = file1.dataStartPos;
             byte DataPos2 = file2.dataStartPos;

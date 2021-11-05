@@ -102,7 +102,7 @@
             this.label24 = new System.Windows.Forms.Label();
             this.modDataStartPosTextBox = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.modDChunkSizeTextB = new System.Windows.Forms.TextBox();
+            this.modDChunkSizeTextBox = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
@@ -435,7 +435,7 @@
             this.tabPage2.Controls.Add(this.label24);
             this.tabPage2.Controls.Add(this.modDataStartPosTextBox);
             this.tabPage2.Controls.Add(this.label25);
-            this.tabPage2.Controls.Add(this.modDChunkSizeTextB);
+            this.tabPage2.Controls.Add(this.modDChunkSizeTextBox);
             this.tabPage2.Controls.Add(this.label26);
             this.tabPage2.Controls.Add(this.label27);
             this.tabPage2.Controls.Add(this.label28);
@@ -518,6 +518,7 @@
             // 
             // changesAudioTextBox
             // 
+            this.changesAudioTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.changesAudioTextBox.Location = new System.Drawing.Point(592, 554);
             this.changesAudioTextBox.Name = "changesAudioTextBox";
             this.changesAudioTextBox.Size = new System.Drawing.Size(349, 151);
@@ -546,16 +547,18 @@
             // 
             // modAudioPathTextBox
             // 
+            this.modAudioPathTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modAudioPathTextBox.Location = new System.Drawing.Point(680, 522);
             this.modAudioPathTextBox.Name = "modAudioPathTextBox";
-            this.modAudioPathTextBox.Size = new System.Drawing.Size(234, 29);
+            this.modAudioPathTextBox.Size = new System.Drawing.Size(234, 21);
             this.modAudioPathTextBox.TabIndex = 64;
             // 
             // origAudioPathTextBox
             // 
+            this.origAudioPathTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origAudioPathTextBox.Location = new System.Drawing.Point(680, 487);
             this.origAudioPathTextBox.Name = "origAudioPathTextBox";
-            this.origAudioPathTextBox.Size = new System.Drawing.Size(234, 29);
+            this.origAudioPathTextBox.Size = new System.Drawing.Size(234, 21);
             this.origAudioPathTextBox.TabIndex = 63;
             // 
             // analyzeAudioChangesButton
@@ -580,9 +583,10 @@
             // 
             // origBytesPerSecondTextBox
             // 
+            this.origBytesPerSecondTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origBytesPerSecondTextBox.Location = new System.Drawing.Point(428, 387);
             this.origBytesPerSecondTextBox.Name = "origBytesPerSecondTextBox";
-            this.origBytesPerSecondTextBox.Size = new System.Drawing.Size(129, 29);
+            this.origBytesPerSecondTextBox.Size = new System.Drawing.Size(129, 21);
             this.origBytesPerSecondTextBox.TabIndex = 60;
             // 
             // label10
@@ -597,9 +601,10 @@
             // 
             // origBlockAllignTextBox
             // 
+            this.origBlockAllignTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origBlockAllignTextBox.Location = new System.Drawing.Point(428, 338);
             this.origBlockAllignTextBox.Name = "origBlockAllignTextBox";
-            this.origBlockAllignTextBox.Size = new System.Drawing.Size(131, 29);
+            this.origBlockAllignTextBox.Size = new System.Drawing.Size(131, 21);
             this.origBlockAllignTextBox.TabIndex = 58;
             // 
             // label9
@@ -614,9 +619,10 @@
             // 
             // origFChunkSizeTextBox
             // 
+            this.origFChunkSizeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origFChunkSizeTextBox.Location = new System.Drawing.Point(428, 291);
             this.origFChunkSizeTextBox.Name = "origFChunkSizeTextBox";
-            this.origFChunkSizeTextBox.Size = new System.Drawing.Size(131, 29);
+            this.origFChunkSizeTextBox.Size = new System.Drawing.Size(131, 21);
             this.origFChunkSizeTextBox.TabIndex = 56;
             // 
             // decryptAudioButton
@@ -641,6 +647,7 @@
             // 
             // decryptAudioTextBox
             // 
+            this.decryptAudioTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.decryptAudioTextBox.Location = new System.Drawing.Point(1022, 545);
             this.decryptAudioTextBox.Name = "decryptAudioTextBox";
             this.decryptAudioTextBox.Size = new System.Drawing.Size(317, 119);
@@ -659,9 +666,10 @@
             // 
             // origDataStartPosTextBox
             // 
+            this.origDataStartPosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origDataStartPosTextBox.Location = new System.Drawing.Point(428, 238);
             this.origDataStartPosTextBox.Name = "origDataStartPosTextBox";
-            this.origDataStartPosTextBox.Size = new System.Drawing.Size(131, 29);
+            this.origDataStartPosTextBox.Size = new System.Drawing.Size(131, 21);
             this.origDataStartPosTextBox.TabIndex = 51;
             // 
             // label14
@@ -676,9 +684,10 @@
             // 
             // creationalAudioTextBox
             // 
+            this.creationalAudioTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.creationalAudioTextBox.Location = new System.Drawing.Point(169, 694);
             this.creationalAudioTextBox.Name = "creationalAudioTextBox";
-            this.creationalAudioTextBox.Size = new System.Drawing.Size(264, 29);
+            this.creationalAudioTextBox.Size = new System.Drawing.Size(264, 21);
             this.creationalAudioTextBox.TabIndex = 49;
             // 
             // encryptAudioButton
@@ -690,6 +699,7 @@
             this.encryptAudioButton.TabIndex = 48;
             this.encryptAudioButton.Text = "Зашифровать";
             this.encryptAudioButton.UseVisualStyleBackColor = true;
+            this.encryptAudioButton.Click += new System.EventHandler(this.encryptAudioButton_Click);
             // 
             // label15
             // 
@@ -703,6 +713,7 @@
             // 
             // encryptAudioTextBox
             // 
+            this.encryptAudioTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.encryptAudioTextBox.Location = new System.Drawing.Point(20, 539);
             this.encryptAudioTextBox.Name = "encryptAudioTextBox";
             this.encryptAudioTextBox.Size = new System.Drawing.Size(309, 119);
@@ -721,9 +732,10 @@
             // 
             // origDChunkSizeTextBox
             // 
+            this.origDChunkSizeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origDChunkSizeTextBox.Location = new System.Drawing.Point(429, 187);
             this.origDChunkSizeTextBox.Name = "origDChunkSizeTextBox";
-            this.origDChunkSizeTextBox.Size = new System.Drawing.Size(130, 29);
+            this.origDChunkSizeTextBox.Size = new System.Drawing.Size(130, 21);
             this.origDChunkSizeTextBox.TabIndex = 44;
             // 
             // label17
@@ -758,30 +770,34 @@
             // 
             // origBitPerSampleTextBox
             // 
+            this.origBitPerSampleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origBitPerSampleTextBox.Location = new System.Drawing.Point(430, 143);
             this.origBitPerSampleTextBox.Name = "origBitPerSampleTextBox";
-            this.origBitPerSampleTextBox.Size = new System.Drawing.Size(129, 29);
+            this.origBitPerSampleTextBox.Size = new System.Drawing.Size(129, 21);
             this.origBitPerSampleTextBox.TabIndex = 40;
             // 
             // origChannelsTextBox
             // 
+            this.origChannelsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origChannelsTextBox.Location = new System.Drawing.Point(430, 101);
             this.origChannelsTextBox.Name = "origChannelsTextBox";
-            this.origChannelsTextBox.Size = new System.Drawing.Size(130, 29);
+            this.origChannelsTextBox.Size = new System.Drawing.Size(130, 21);
             this.origChannelsTextBox.TabIndex = 39;
             // 
             // origSampleTextBox
             // 
+            this.origSampleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origSampleTextBox.Location = new System.Drawing.Point(430, 57);
             this.origSampleTextBox.Name = "origSampleTextBox";
-            this.origSampleTextBox.Size = new System.Drawing.Size(131, 29);
+            this.origSampleTextBox.Size = new System.Drawing.Size(131, 21);
             this.origSampleTextBox.TabIndex = 38;
             // 
             // origAudioFileTextBox
             // 
+            this.origAudioFileTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origAudioFileTextBox.Location = new System.Drawing.Point(20, 113);
             this.origAudioFileTextBox.Name = "origAudioFileTextBox";
-            this.origAudioFileTextBox.Size = new System.Drawing.Size(180, 29);
+            this.origAudioFileTextBox.Size = new System.Drawing.Size(247, 21);
             this.origAudioFileTextBox.TabIndex = 37;
             // 
             // origAudioFileButton
@@ -793,6 +809,7 @@
             this.origAudioFileButton.TabIndex = 36;
             this.origAudioFileButton.Text = "Открыть оригинальный файл";
             this.origAudioFileButton.UseVisualStyleBackColor = true;
+            this.origAudioFileButton.Click += new System.EventHandler(this.origAudioFileButton_Click);
             // 
             // axWindowsMediaPlayer1
             // 
@@ -825,9 +842,10 @@
             // 
             // modBytesPerSecondTextBox
             // 
-            this.modBytesPerSecondTextBox.Location = new System.Drawing.Point(1239, 387);
+            this.modBytesPerSecondTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modBytesPerSecondTextBox.Location = new System.Drawing.Point(1241, 393);
             this.modBytesPerSecondTextBox.Name = "modBytesPerSecondTextBox";
-            this.modBytesPerSecondTextBox.Size = new System.Drawing.Size(129, 29);
+            this.modBytesPerSecondTextBox.Size = new System.Drawing.Size(129, 21);
             this.modBytesPerSecondTextBox.TabIndex = 86;
             // 
             // label22
@@ -842,9 +860,10 @@
             // 
             // modBlockAllignTextBox
             // 
-            this.modBlockAllignTextBox.Location = new System.Drawing.Point(1239, 338);
+            this.modBlockAllignTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modBlockAllignTextBox.Location = new System.Drawing.Point(1241, 344);
             this.modBlockAllignTextBox.Name = "modBlockAllignTextBox";
-            this.modBlockAllignTextBox.Size = new System.Drawing.Size(131, 29);
+            this.modBlockAllignTextBox.Size = new System.Drawing.Size(131, 21);
             this.modBlockAllignTextBox.TabIndex = 84;
             // 
             // label23
@@ -859,9 +878,10 @@
             // 
             // modFChunkSizeTextBox
             // 
-            this.modFChunkSizeTextBox.Location = new System.Drawing.Point(1239, 291);
+            this.modFChunkSizeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modFChunkSizeTextBox.Location = new System.Drawing.Point(1241, 297);
             this.modFChunkSizeTextBox.Name = "modFChunkSizeTextBox";
-            this.modFChunkSizeTextBox.Size = new System.Drawing.Size(131, 29);
+            this.modFChunkSizeTextBox.Size = new System.Drawing.Size(131, 21);
             this.modFChunkSizeTextBox.TabIndex = 82;
             // 
             // label24
@@ -876,9 +896,10 @@
             // 
             // modDataStartPosTextBox
             // 
-            this.modDataStartPosTextBox.Location = new System.Drawing.Point(1239, 238);
+            this.modDataStartPosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modDataStartPosTextBox.Location = new System.Drawing.Point(1241, 244);
             this.modDataStartPosTextBox.Name = "modDataStartPosTextBox";
-            this.modDataStartPosTextBox.Size = new System.Drawing.Size(131, 29);
+            this.modDataStartPosTextBox.Size = new System.Drawing.Size(131, 21);
             this.modDataStartPosTextBox.TabIndex = 80;
             // 
             // label25
@@ -891,12 +912,13 @@
             this.label25.TabIndex = 79;
             this.label25.Text = "Байт в области данных: ";
             // 
-            // modDChunkSizeTextB
+            // modDChunkSizeTextBox
             // 
-            this.modDChunkSizeTextB.Location = new System.Drawing.Point(1240, 187);
-            this.modDChunkSizeTextB.Name = "modDChunkSizeTextB";
-            this.modDChunkSizeTextB.Size = new System.Drawing.Size(130, 29);
-            this.modDChunkSizeTextB.TabIndex = 78;
+            this.modDChunkSizeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modDChunkSizeTextBox.Location = new System.Drawing.Point(1242, 193);
+            this.modDChunkSizeTextBox.Name = "modDChunkSizeTextBox";
+            this.modDChunkSizeTextBox.Size = new System.Drawing.Size(130, 21);
+            this.modDChunkSizeTextBox.TabIndex = 78;
             // 
             // label26
             // 
@@ -930,30 +952,34 @@
             // 
             // modBitPerSampleTextBox
             // 
-            this.modBitPerSampleTextBox.Location = new System.Drawing.Point(1241, 143);
+            this.modBitPerSampleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modBitPerSampleTextBox.Location = new System.Drawing.Point(1243, 149);
             this.modBitPerSampleTextBox.Name = "modBitPerSampleTextBox";
-            this.modBitPerSampleTextBox.Size = new System.Drawing.Size(129, 29);
+            this.modBitPerSampleTextBox.Size = new System.Drawing.Size(129, 21);
             this.modBitPerSampleTextBox.TabIndex = 74;
             // 
             // modChannelsTextBox
             // 
-            this.modChannelsTextBox.Location = new System.Drawing.Point(1241, 101);
+            this.modChannelsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modChannelsTextBox.Location = new System.Drawing.Point(1243, 107);
             this.modChannelsTextBox.Name = "modChannelsTextBox";
-            this.modChannelsTextBox.Size = new System.Drawing.Size(130, 29);
+            this.modChannelsTextBox.Size = new System.Drawing.Size(130, 21);
             this.modChannelsTextBox.TabIndex = 73;
             // 
             // modSampleTextBox
             // 
-            this.modSampleTextBox.Location = new System.Drawing.Point(1241, 57);
+            this.modSampleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modSampleTextBox.Location = new System.Drawing.Point(1243, 63);
             this.modSampleTextBox.Name = "modSampleTextBox";
-            this.modSampleTextBox.Size = new System.Drawing.Size(131, 29);
+            this.modSampleTextBox.Size = new System.Drawing.Size(131, 21);
             this.modSampleTextBox.TabIndex = 72;
             // 
             // modAudioFileTextBox
             // 
+            this.modAudioFileTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modAudioFileTextBox.Location = new System.Drawing.Point(831, 113);
             this.modAudioFileTextBox.Name = "modAudioFileTextBox";
-            this.modAudioFileTextBox.Size = new System.Drawing.Size(180, 29);
+            this.modAudioFileTextBox.Size = new System.Drawing.Size(242, 21);
             this.modAudioFileTextBox.TabIndex = 71;
             // 
             // modAudioFileButton
@@ -965,6 +991,7 @@
             this.modAudioFileButton.TabIndex = 70;
             this.modAudioFileButton.Text = "Открыть измененный файл";
             this.modAudioFileButton.UseVisualStyleBackColor = true;
+            this.modAudioFileButton.Click += new System.EventHandler(this.modAudioFileButton_Click);
             // 
             // MultiStegoForm
             // 
@@ -1068,7 +1095,7 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox modDataStartPosTextBox;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox modDChunkSizeTextB;
+        private System.Windows.Forms.TextBox modDChunkSizeTextBox;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;

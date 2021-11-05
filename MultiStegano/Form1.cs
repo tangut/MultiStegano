@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MultiStegano.Entities;
+using MultiStegano.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,7 @@ namespace MultiStegano
 {
     public partial class MultiStegoForm : Form
     {
+
         public MultiStegoForm()
         {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -196,9 +199,66 @@ namespace MultiStegano
         {
             imgEncryptTextBox.Text = "";
         }
- 
+
+
         #endregion
 
+        #region Audio steganography
+        private static WavFile origWavFile = new WavFile();
+        private static WavFile modWavFile = new WavFile();
 
+        private void origAudioFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Wav files (*.WAV)|*.wav";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                origAudioFileTextBox.Text = dialog.FileName.ToString();
+                origWavFile = WavUtils.CreateWavFile(origAudioFileTextBox.Text);
+                origSampleTextBox.Text = Convert.ToString(origWavFile.dwSamplesPerSec) + " Гц";
+                origChannelsTextBox.Text = Convert.ToString(origWavFile.wChannels);
+                origBitPerSampleTextBox.Text = Convert.ToString(origWavFile.wBitsPerSample);
+                origDChunkSizeTextBox.Text = Convert.ToString(origWavFile.dwDChunkSize) + " Байт";
+                origDataStartPosTextBox.Text = Convert.ToString(origWavFile.dataStartPos);
+                origFChunkSizeTextBox.Text = Convert.ToString(origWavFile.dwFChunkSize);
+                origBlockAllignTextBox.Text = Convert.ToString(origWavFile.wBlockAlign);
+                origBytesPerSecondTextBox.Text = Convert.ToString(origWavFile.dwAvgBytesPerSec);
+            }
+        }
+
+
+        private void modAudioFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Wav files (*.WAV)|*.wav";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                modAudioFileTextBox.Text = dialog.FileName.ToString();
+                modWavFile = WavUtils.CreateWavFile(modAudioFileTextBox.Text);
+                modSampleTextBox.Text = Convert.ToString(modWavFile.dwSamplesPerSec) + " Гц";
+                modChannelsTextBox.Text = Convert.ToString(modWavFile.wChannels);
+                modBitPerSampleTextBox.Text = Convert.ToString(modWavFile.wBitsPerSample);
+                modDChunkSizeTextBox.Text = Convert.ToString(modWavFile.dwDChunkSize) + " Байт";
+                modDataStartPosTextBox.Text = Convert.ToString(modWavFile.dataStartPos);
+                modFChunkSizeTextBox.Text = Convert.ToString(modWavFile.dwFChunkSize);
+                modBlockAllignTextBox.Text = Convert.ToString(modWavFile.wBlockAlign);
+                modBytesPerSecondTextBox.Text = Convert.ToString(modWavFile.dwAvgBytesPerSec);
+            }
+        }
+
+        // зашифровка сообщения в аудиофайл
+        private void encryptAudioButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "Wav files (*.WAV)|*.wav";
+            UInt32 bytesPerSample = origWavFile.dwAvgBytesPerSec;
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                creationalAudioTextBox.Text = saveFile.FileName.ToString();
+                WavUtils.WriteFile(origWavFile, origAudioFileTextBox.Text, creationalAudioTextBox.Text, encryptAudioTextBox.Text);
+            }
+        }
+
+        #endregion Audio steganography
     }
 }
