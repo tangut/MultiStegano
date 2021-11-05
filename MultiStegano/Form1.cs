@@ -21,6 +21,8 @@ namespace MultiStegano
             InitializeComponent();
         }
 
+        #region Image steganography
+
         private void OpenOriginalImageButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -194,5 +196,9 @@ namespace MultiStegano
         {
             imgEncryptTextBox.Text = "";
         }
+ 
+        #endregion
+
+
     }
 }
