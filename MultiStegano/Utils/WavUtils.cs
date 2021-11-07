@@ -124,7 +124,7 @@ namespace MultiStegano.Utils
             }
         }
         // дешифратор сообщения
-        public static string EncryptFile(WavFile file, string path)
+        public static string DecryptFile(WavFile file, string path)
         {
             byte DataPos = file.dataStartPos;
             byte[] source;

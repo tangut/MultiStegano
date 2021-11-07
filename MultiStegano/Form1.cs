@@ -249,13 +249,82 @@ namespace MultiStegano
         // зашифровка сообщения в аудиофайл
         private void encryptAudioButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.Filter = "Wav files (*.WAV)|*.wav";
-            UInt32 bytesPerSample = origWavFile.dwAvgBytesPerSec;
-            if (saveFile.ShowDialog() == DialogResult.OK)
+            while (true)
             {
-                creationalAudioTextBox.Text = saveFile.FileName.ToString();
-                WavUtils.WriteFile(origWavFile, origAudioFileTextBox.Text, creationalAudioTextBox.Text, encryptAudioTextBox.Text);
+                if (origAudioFileTextBox.Text == "")
+                {
+                    MessageBox.Show("Сначала нужно выбрать оригинальный wav файл.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "Wav files (*.WAV)|*.wav";
+                UInt32 bytesPerSample = origWavFile.dwAvgBytesPerSec;
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    creationalAudioTextBox.Text = saveFile.FileName.ToString();
+                    WavUtils.WriteFile(origWavFile, origAudioFileTextBox.Text, creationalAudioTextBox.Text, encryptAudioTextBox.Text);
+                }
+                break;
+            }
+        }
+
+        // дешифровка сообщения из аудиофайла
+        private void decryptAudioButton_Click(object sender, EventArgs e)
+        {
+            while (true)
+            {
+                if (modAudioFileTextBox.Text == "")
+                {
+                    MessageBox.Show("Сначала нужно выбрать измененный wav файл.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                String decryptedMessage = WavUtils.DecryptFile(modWavFile, modAudioFileTextBox.Text);
+                decryptAudioTextBox.Text = decryptedMessage;
+                break;
+            }
+        }
+
+        private void chooseOrigAudioButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Оригинальный wav файл (*.WAV)|*.wav";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                origAudioPathTextBox.Text = dialog.FileName.ToString();
+            }
+        }
+
+        private void chooseModAudioButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Измененный wav файл (*.WAV)|*.wav";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                modAudioPathTextBox.Text = dialog.FileName.ToString();
+            }
+        }
+
+        // анализ измененных битов в сообщении
+        private void analyzeAudioChangesButton_Click(object sender, EventArgs e)
+        {
+            while (true)
+            {
+                if (origAudioPathTextBox.Text == "")
+                {
+                    MessageBox.Show("Сначала нужно выбрать оригинальный wav файл для анализа.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+
+                if (modAudioPathTextBox.Text == "")
+                {
+                    MessageBox.Show("Сначала нужно выбрать измененный wav файл для анализа.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+
+                origWavFile = WavUtils.CreateWavFile(origAudioPathTextBox.Text);
+                modWavFile = WavUtils.CreateWavFile(modAudioPathTextBox.Text);
+                changesAudioTextBox.Text = WavUtils.Analyze(origWavFile, modWavFile, origAudioPathTextBox.Text, modAudioPathTextBox.Text);
+                break;
             }
         }
 
