@@ -328,6 +328,31 @@ namespace MultiStegano
             }
         }
 
+
         #endregion Audio steganography
+
+        private void openOrigVideoFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Video files (*.MP4)|*.mp4";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                origVideoPlayer.URL = dialog.FileName.ToString();
+                origVideoFileTextBox.Text = dialog.FileName.ToString();
+            }
+        }
+
+        private void openModVideoFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Video files (*.MP4)|*.mp4";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                modVideoPlayer.URL = dialog.FileName.ToString();
+                modVideoFileTextBox.Text = dialog.FileName.ToString();
+            }
+        }
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Avi.cs" />
     <Compile Include="Entities\Colors.cs" />
     <Compile Include="Entities\WavFile.cs" />
     <Compile Include="Form1.cs">
@@ -54,6 +55,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\AviReader.cs" />
+    <Compile Include="Utils\AviWriter.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

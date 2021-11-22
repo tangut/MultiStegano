@@ -93,7 +93,7 @@ namespace MultiStegano.Utils
             try
             {
                 if (source.Length < bufferMessage.Length * 4 + DataPos + 16)
-                {     
+                { 
                     throw new Exception("Длина сообщения больше длины файла");
                 }
 
