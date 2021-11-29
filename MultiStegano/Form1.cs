@@ -1,10 +1,13 @@
-﻿using MultiStegano.Entities;
+﻿using Accord.Video.FFMPEG;
+using FFMpegCore;
+using MultiStegano.Entities;
 using MultiStegano.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +24,7 @@ namespace MultiStegano
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
+            GlobalFFOptions.Configure(new FFOptions { BinaryFolder = "./FFMPEG", TemporaryFilesFolder = "./FFMPEG" });
             InitializeComponent();
         }
 
@@ -352,6 +356,50 @@ namespace MultiStegano
             {
                 modVideoPlayer.URL = dialog.FileName.ToString();
                 modVideoFileTextBox.Text = dialog.FileName.ToString();
+            }
+        }
+
+        private void encryptTextInVideoButton_Click(object sender, EventArgs e)
+        {
+            VideoFileReader reader = new VideoFileReader();
+            String origFile = origVideoFileTextBox.Text;
+            reader.Open(origFile);
+            long framecount = reader.FrameCount;
+            double frameRate = reader.FrameRate.Value;
+            int bitRate = reader.BitRate;
+            VideoCodec codecName = (VideoCodec)Enum.Parse(typeof(VideoCodec), reader.CodecName.ToUpper());
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "MP4 files (*.MP4)|*.mp4";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                String path = saveFileDialog.FileName.ToString();
+                MessageBox.Show("Подождите, запись видеофайла выполняется!");
+                FFMpeg.ExtractAudio(origFile, "audio.mp3");
+                using (var writer = new VideoFileWriter())
+                {
+                    Bitmap frame = reader.ReadVideoFrame();
+                    writer.Open("temp.mp4", frame.Width, frame.Height, (int)frameRate, VideoCodec.Default, bitRate);
+                    List<ImageInfo> list = new List<ImageInfo>();
+                    for (int i = 0; i < framecount; i++)
+                    {
+                        writer.WriteVideoFrame(frame);
+                        frame.Dispose();
+                        try
+                        {
+                            frame = reader.ReadVideoFrame();
+                        }
+                        catch (System.ArgumentException)
+                        {
+                            continue;
+                        }
+                    }
+                    writer.Close();
+                    reader.Close();
+                }
+                FFMpeg.ReplaceAudio("temp.mp4", "audio.mp3", path);
+                File.Delete("audio.mp3");
+                File.Delete("temp.mp4");
+                MessageBox.Show("Видеофайл записан!", "ОК", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

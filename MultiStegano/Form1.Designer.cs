@@ -110,16 +110,20 @@
             this.origAudioFileTextBox = new System.Windows.Forms.TextBox();
             this.origAudioFileButton = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.openModVideoFileButton = new System.Windows.Forms.Button();
+            this.openOrigVideoFileButton = new System.Windows.Forms.Button();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.modVideoFileTextBox = new System.Windows.Forms.TextBox();
+            this.origVideoFileTextBox = new System.Windows.Forms.TextBox();
             this.modVideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.origVideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.origVideoFileTextBox = new System.Windows.Forms.TextBox();
-            this.modVideoFileTextBox = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.openOrigVideoFileButton = new System.Windows.Forms.Button();
-            this.openModVideoFileButton = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.encryptTextInVideoButton = new System.Windows.Forms.Button();
+            this.clearEncryptVideoTextButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ImageStego.SuspendLayout();
             this.colorBox.SuspendLayout();
@@ -990,6 +994,10 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage3.Controls.Add(this.clearEncryptVideoTextButton);
+            this.tabPage3.Controls.Add(this.encryptTextInVideoButton);
+            this.tabPage3.Controls.Add(this.label33);
+            this.tabPage3.Controls.Add(this.richTextBox1);
             this.tabPage3.Controls.Add(this.openModVideoFileButton);
             this.tabPage3.Controls.Add(this.openOrigVideoFileButton);
             this.tabPage3.Controls.Add(this.label32);
@@ -1007,6 +1015,78 @@
             this.tabPage3.Size = new System.Drawing.Size(1387, 765);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "VideoStego";
+            // 
+            // openModVideoFileButton
+            // 
+            this.openModVideoFileButton.Location = new System.Drawing.Point(802, 386);
+            this.openModVideoFileButton.Name = "openModVideoFileButton";
+            this.openModVideoFileButton.Size = new System.Drawing.Size(126, 59);
+            this.openModVideoFileButton.TabIndex = 9;
+            this.openModVideoFileButton.Text = "Открыть измененный файл";
+            this.openModVideoFileButton.UseVisualStyleBackColor = true;
+            this.openModVideoFileButton.Click += new System.EventHandler(this.openModVideoFileButton_Click);
+            // 
+            // openOrigVideoFileButton
+            // 
+            this.openOrigVideoFileButton.Location = new System.Drawing.Point(35, 386);
+            this.openOrigVideoFileButton.Name = "openOrigVideoFileButton";
+            this.openOrigVideoFileButton.Size = new System.Drawing.Size(123, 59);
+            this.openOrigVideoFileButton.TabIndex = 8;
+            this.openOrigVideoFileButton.Text = "Отркыть оригинальный файл";
+            this.openOrigVideoFileButton.UseVisualStyleBackColor = true;
+            this.openOrigVideoFileButton.Click += new System.EventHandler(this.openOrigVideoFileButton_Click);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label32.Location = new System.Drawing.Point(798, 347);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(116, 20);
+            this.label32.TabIndex = 7;
+            this.label32.Text = "Путь к файлу:";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label31.Location = new System.Drawing.Point(42, 347);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(116, 20);
+            this.label31.TabIndex = 6;
+            this.label31.Text = "Путь к файлу:";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(774, 7);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(154, 16);
+            this.label30.TabIndex = 5;
+            this.label30.Text = "Измененное видео:";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(24, 14);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(168, 16);
+            this.label29.TabIndex = 4;
+            this.label29.Text = "Оригинальное видео:";
+            // 
+            // modVideoFileTextBox
+            // 
+            this.modVideoFileTextBox.Location = new System.Drawing.Point(920, 341);
+            this.modVideoFileTextBox.Name = "modVideoFileTextBox";
+            this.modVideoFileTextBox.Size = new System.Drawing.Size(302, 22);
+            this.modVideoFileTextBox.TabIndex = 3;
+            // 
+            // origVideoFileTextBox
+            // 
+            this.origVideoFileTextBox.Location = new System.Drawing.Point(164, 341);
+            this.origVideoFileTextBox.Name = "origVideoFileTextBox";
+            this.origVideoFileTextBox.Size = new System.Drawing.Size(288, 22);
+            this.origVideoFileTextBox.TabIndex = 2;
             // 
             // modVideoPlayer
             // 
@@ -1026,77 +1106,41 @@
             this.origVideoPlayer.Size = new System.Drawing.Size(424, 294);
             this.origVideoPlayer.TabIndex = 0;
             // 
-            // origVideoFileTextBox
+            // richTextBox1
             // 
-            this.origVideoFileTextBox.Location = new System.Drawing.Point(164, 341);
-            this.origVideoFileTextBox.Name = "origVideoFileTextBox";
-            this.origVideoFileTextBox.Size = new System.Drawing.Size(288, 22);
-            this.origVideoFileTextBox.TabIndex = 2;
+            this.richTextBox1.Location = new System.Drawing.Point(28, 511);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(476, 214);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
             // 
-            // modVideoFileTextBox
+            // label33
             // 
-            this.modVideoFileTextBox.Location = new System.Drawing.Point(920, 341);
-            this.modVideoFileTextBox.Name = "modVideoFileTextBox";
-            this.modVideoFileTextBox.Size = new System.Drawing.Size(302, 22);
-            this.modVideoFileTextBox.TabIndex = 3;
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(25, 492);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(278, 16);
+            this.label33.TabIndex = 11;
+            this.label33.Text = "Введите сообщение для внедрения: ";
             // 
-            // label29
+            // encryptTextInVideoButton
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(24, 14);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(168, 16);
-            this.label29.TabIndex = 4;
-            this.label29.Text = "Оригинальное видео:";
+            this.encryptTextInVideoButton.Location = new System.Drawing.Point(510, 511);
+            this.encryptTextInVideoButton.Name = "encryptTextInVideoButton";
+            this.encryptTextInVideoButton.Size = new System.Drawing.Size(124, 49);
+            this.encryptTextInVideoButton.TabIndex = 12;
+            this.encryptTextInVideoButton.Text = "Внедрить";
+            this.encryptTextInVideoButton.UseVisualStyleBackColor = true;
+            this.encryptTextInVideoButton.Click += new System.EventHandler(this.encryptTextInVideoButton_Click);
             // 
-            // label30
+            // clearEncryptVideoTextButton
             // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(774, 7);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(154, 16);
-            this.label30.TabIndex = 5;
-            this.label30.Text = "Измененное видео:";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label31.Location = new System.Drawing.Point(42, 347);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(116, 20);
-            this.label31.TabIndex = 6;
-            this.label31.Text = "Путь к файлу:";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label32.Location = new System.Drawing.Point(798, 347);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(116, 20);
-            this.label32.TabIndex = 7;
-            this.label32.Text = "Путь к файлу:";
-            // 
-            // openOrigVideoFileButton
-            // 
-            this.openOrigVideoFileButton.Location = new System.Drawing.Point(35, 386);
-            this.openOrigVideoFileButton.Name = "openOrigVideoFileButton";
-            this.openOrigVideoFileButton.Size = new System.Drawing.Size(123, 59);
-            this.openOrigVideoFileButton.TabIndex = 8;
-            this.openOrigVideoFileButton.Text = "Отркыть оригинальный файл";
-            this.openOrigVideoFileButton.UseVisualStyleBackColor = true;
-            this.openOrigVideoFileButton.Click += new System.EventHandler(this.openOrigVideoFileButton_Click);
-            // 
-            // openModVideoFileButton
-            // 
-            this.openModVideoFileButton.Location = new System.Drawing.Point(802, 386);
-            this.openModVideoFileButton.Name = "openModVideoFileButton";
-            this.openModVideoFileButton.Size = new System.Drawing.Size(126, 59);
-            this.openModVideoFileButton.TabIndex = 9;
-            this.openModVideoFileButton.Text = "Открыть измененный файл";
-            this.openModVideoFileButton.UseVisualStyleBackColor = true;
-            this.openModVideoFileButton.Click += new System.EventHandler(this.openModVideoFileButton_Click);
+            this.clearEncryptVideoTextButton.Location = new System.Drawing.Point(510, 676);
+            this.clearEncryptVideoTextButton.Name = "clearEncryptVideoTextButton";
+            this.clearEncryptVideoTextButton.Size = new System.Drawing.Size(124, 49);
+            this.clearEncryptVideoTextButton.TabIndex = 13;
+            this.clearEncryptVideoTextButton.Text = "Очистить";
+            this.clearEncryptVideoTextButton.UseVisualStyleBackColor = true;
             // 
             // MultiStegoForm
             // 
@@ -1220,6 +1264,10 @@
         private System.Windows.Forms.TextBox origVideoFileTextBox;
         private System.Windows.Forms.Button openModVideoFileButton;
         private System.Windows.Forms.Button openOrigVideoFileButton;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button clearEncryptVideoTextButton;
+        private System.Windows.Forms.Button encryptTextInVideoButton;
     }
 }
 
