@@ -382,72 +382,63 @@ namespace MultiStegano
 
         private void encryptTextInVideoButton_Click(object sender, EventArgs e)
         {
-            VideoFileReader reader = new VideoFileReader();
-            String origFile = origVideoFileTextBox.Text;
-            reader.Open(origFile);
-            long framecount = reader.FrameCount;
-            double frameRate = reader.FrameRate.Value;
-            int bitRate = reader.BitRate;
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "AVI files (*.AVI)|*.avi";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            while (true)
             {
-                String path = saveFileDialog.FileName.ToString();
-                disableVideoButtons();
-                MessageBox.Show("Подождите, запись видеофайла выполняется!");
-                FFMpeg.ExtractAudio(origFile, "audio.mp3");
-                FileStream fileStream = new FileStream("audio.mp3", FileMode.Open);
-                using (var mp3Reader = new Mp3FileReader(fileStream))
+                if (origVideoFileTextBox.Text == "")
                 {
-                    using (var waveWriter = new WaveFileWriter("audio.wav", mp3Reader.WaveFormat))
-                    {
-                        mp3Reader.CopyTo(waveWriter);
-                    }
+                    MessageBox.Show("Сначала нужно выбрать оригинальный avi файл.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
                 }
-                fileStream.Dispose();
-                fileStream.Close();
-                WavFile wavFile = WavUtils.CreateWavFile("audio.wav");
-                WavUtils.WriteFile(wavFile, "audio.wav", "audio1.wav", "привет");
-                using (var writer = new VideoFileWriter())
+                if (encryptTextVideoTextBox.Text == "")
                 {
-                    Bitmap frame = reader.ReadVideoFrame();
-                    writer.Open("temp.avi", frame.Width, frame.Height, (int)frameRate, VideoCodec.Default, Int32.MaxValue);
-                    for (int i = 0; i < framecount; i++)
-                    {
-                        writer.WriteVideoFrame(frame);
-                        frame.Dispose();
-                        try
-                        {
-                            frame = reader.ReadVideoFrame();
-                        }
-                        catch (System.ArgumentException)
-                        {
-                            continue;
-                        }
-                    }
-                    writer.Close();
-                    reader.Close();
+                    MessageBox.Show("Пожалуйста, введите сообщение для зашифровки.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
                 }
-                AviManager aviManager = new AviManager("temp.avi", true);
-                aviManager.AddAudioStream("audio1.wav", 0);
-                aviManager.Close();
-                File.Delete("audio.mp3");
-                File.Delete("audio.wav");
-                File.Delete("audio1.wav");
-                MessageBox.Show("Видеофайл записан!", "ОК", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                enableVideoButtons();
+                if (origVideoFileTextBox.Text == modVideoFileTextBox.Text)
+                {
+                    MessageBox.Show("Нельзя выбирать файл, который проигрывается во втором плеере!", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                String origFile = origVideoFileTextBox.Text;
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "AVI files (*.AVI)|*.avi";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    String message = encryptTextVideoTextBox.Text;
+                    String outputFile = saveFileDialog.FileName.ToString();
+                    disableVideoButtons();
+                    MessageBox.Show("Подождите, запись видеофайла выполняется!");
+                    VideoUtils.EncryptInAudio(origFile, outputFile, message);
+                    MessageBox.Show("Видеофайл записан!", "ОК", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    enableVideoButtons();
+                }
+                break;
             }
         }
 
         private void decryptVideoButton_Click(object sender, EventArgs e)
         {
-            AviManager aviManager = new AviManager("temp.avi", true);
-            Library.AudioStream audioStream = aviManager.GetWaveStream();
-            audioStream.ExportStream("audio2.wav");
-            WavFile wavFile = WavUtils.CreateWavFile("audio2.wav");
-            String text = WavUtils.DecryptFromVideoFile(wavFile, "audio2.wav");
-            decryptVideoTextBox.Text = text;
-            File.Delete("audio2.wav");
+            while (true)
+            {
+                if (modVideoFileTextBox.Text == "")
+                {
+                    MessageBox.Show("Сначала нужно выбрать измененный avi файл.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                } 
+                String modFile = modVideoFileTextBox.Text;
+                decryptVideoTextBox.Text = VideoUtils.DecryptFromAudio(modFile);
+                break;
+            }
+        }
+
+        private void clearDecryptTextButton_Click_1(object sender, EventArgs e)
+        {
+            decryptVideoTextBox.Clear();
+        }
+
+        private void clearEncryptVideoTextButton_Click(object sender, EventArgs e)
+        {
+            encryptTextVideoTextBox.Clear();
         }
     }
 }

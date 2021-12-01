@@ -110,10 +110,14 @@
             this.origAudioFileTextBox = new System.Windows.Forms.TextBox();
             this.origAudioFileButton = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.clearDecryptTextButton = new System.Windows.Forms.Button();
+            this.decryptVideoButton = new System.Windows.Forms.Button();
+            this.label34 = new System.Windows.Forms.Label();
+            this.decryptVideoTextBox = new System.Windows.Forms.RichTextBox();
             this.clearEncryptVideoTextButton = new System.Windows.Forms.Button();
             this.encryptTextInVideoButton = new System.Windows.Forms.Button();
             this.label33 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.encryptTextVideoTextBox = new System.Windows.Forms.RichTextBox();
             this.openModVideoFileButton = new System.Windows.Forms.Button();
             this.openOrigVideoFileButton = new System.Windows.Forms.Button();
             this.label32 = new System.Windows.Forms.Label();
@@ -124,9 +128,6 @@
             this.origVideoFileTextBox = new System.Windows.Forms.TextBox();
             this.modVideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.origVideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.decryptVideoTextBox = new System.Windows.Forms.RichTextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.decryptVideoButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ImageStego.SuspendLayout();
             this.colorBox.SuspendLayout();
@@ -206,6 +207,7 @@
             this.modImgPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modImgPath.Location = new System.Drawing.Point(883, 560);
             this.modImgPath.Name = "modImgPath";
+            this.modImgPath.ReadOnly = true;
             this.modImgPath.Size = new System.Drawing.Size(316, 22);
             this.modImgPath.TabIndex = 31;
             this.modImgPath.Text = "Путь к измененному файлу";
@@ -215,6 +217,7 @@
             this.origImgPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origImgPath.Location = new System.Drawing.Point(153, 559);
             this.origImgPath.Name = "origImgPath";
+            this.origImgPath.ReadOnly = true;
             this.origImgPath.Size = new System.Drawing.Size(318, 22);
             this.origImgPath.TabIndex = 30;
             this.origImgPath.Text = "Путь к оригинальному файлу";
@@ -527,6 +530,7 @@
             this.modBytesPerSecondTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modBytesPerSecondTextBox.Location = new System.Drawing.Point(1241, 393);
             this.modBytesPerSecondTextBox.Name = "modBytesPerSecondTextBox";
+            this.modBytesPerSecondTextBox.ReadOnly = true;
             this.modBytesPerSecondTextBox.Size = new System.Drawing.Size(129, 21);
             this.modBytesPerSecondTextBox.TabIndex = 86;
             // 
@@ -545,6 +549,7 @@
             this.modBlockAllignTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modBlockAllignTextBox.Location = new System.Drawing.Point(1241, 344);
             this.modBlockAllignTextBox.Name = "modBlockAllignTextBox";
+            this.modBlockAllignTextBox.ReadOnly = true;
             this.modBlockAllignTextBox.Size = new System.Drawing.Size(131, 21);
             this.modBlockAllignTextBox.TabIndex = 84;
             // 
@@ -563,6 +568,7 @@
             this.modFChunkSizeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modFChunkSizeTextBox.Location = new System.Drawing.Point(1241, 297);
             this.modFChunkSizeTextBox.Name = "modFChunkSizeTextBox";
+            this.modFChunkSizeTextBox.ReadOnly = true;
             this.modFChunkSizeTextBox.Size = new System.Drawing.Size(131, 21);
             this.modFChunkSizeTextBox.TabIndex = 82;
             // 
@@ -581,6 +587,7 @@
             this.modDataStartPosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modDataStartPosTextBox.Location = new System.Drawing.Point(1241, 244);
             this.modDataStartPosTextBox.Name = "modDataStartPosTextBox";
+            this.modDataStartPosTextBox.ReadOnly = true;
             this.modDataStartPosTextBox.Size = new System.Drawing.Size(131, 21);
             this.modDataStartPosTextBox.TabIndex = 80;
             // 
@@ -599,6 +606,7 @@
             this.modDChunkSizeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modDChunkSizeTextBox.Location = new System.Drawing.Point(1242, 193);
             this.modDChunkSizeTextBox.Name = "modDChunkSizeTextBox";
+            this.modDChunkSizeTextBox.ReadOnly = true;
             this.modDChunkSizeTextBox.Size = new System.Drawing.Size(130, 21);
             this.modDChunkSizeTextBox.TabIndex = 78;
             // 
@@ -637,6 +645,7 @@
             this.modBitPerSampleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modBitPerSampleTextBox.Location = new System.Drawing.Point(1243, 149);
             this.modBitPerSampleTextBox.Name = "modBitPerSampleTextBox";
+            this.modBitPerSampleTextBox.ReadOnly = true;
             this.modBitPerSampleTextBox.Size = new System.Drawing.Size(129, 21);
             this.modBitPerSampleTextBox.TabIndex = 74;
             // 
@@ -645,6 +654,7 @@
             this.modChannelsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modChannelsTextBox.Location = new System.Drawing.Point(1243, 107);
             this.modChannelsTextBox.Name = "modChannelsTextBox";
+            this.modChannelsTextBox.ReadOnly = true;
             this.modChannelsTextBox.Size = new System.Drawing.Size(130, 21);
             this.modChannelsTextBox.TabIndex = 73;
             // 
@@ -653,6 +663,7 @@
             this.modSampleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modSampleTextBox.Location = new System.Drawing.Point(1243, 63);
             this.modSampleTextBox.Name = "modSampleTextBox";
+            this.modSampleTextBox.ReadOnly = true;
             this.modSampleTextBox.Size = new System.Drawing.Size(131, 21);
             this.modSampleTextBox.TabIndex = 72;
             // 
@@ -661,6 +672,7 @@
             this.modAudioFileTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modAudioFileTextBox.Location = new System.Drawing.Point(831, 113);
             this.modAudioFileTextBox.Name = "modAudioFileTextBox";
+            this.modAudioFileTextBox.ReadOnly = true;
             this.modAudioFileTextBox.Size = new System.Drawing.Size(242, 21);
             this.modAudioFileTextBox.TabIndex = 71;
             // 
@@ -702,6 +714,7 @@
             this.changesAudioTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.changesAudioTextBox.Location = new System.Drawing.Point(592, 554);
             this.changesAudioTextBox.Name = "changesAudioTextBox";
+            this.changesAudioTextBox.ReadOnly = true;
             this.changesAudioTextBox.Size = new System.Drawing.Size(349, 151);
             this.changesAudioTextBox.TabIndex = 67;
             this.changesAudioTextBox.Text = "";
@@ -731,6 +744,7 @@
             this.modAudioPathTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.modAudioPathTextBox.Location = new System.Drawing.Point(680, 522);
             this.modAudioPathTextBox.Name = "modAudioPathTextBox";
+            this.modAudioPathTextBox.ReadOnly = true;
             this.modAudioPathTextBox.Size = new System.Drawing.Size(234, 21);
             this.modAudioPathTextBox.TabIndex = 64;
             // 
@@ -739,6 +753,7 @@
             this.origAudioPathTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origAudioPathTextBox.Location = new System.Drawing.Point(680, 487);
             this.origAudioPathTextBox.Name = "origAudioPathTextBox";
+            this.origAudioPathTextBox.ReadOnly = true;
             this.origAudioPathTextBox.Size = new System.Drawing.Size(234, 21);
             this.origAudioPathTextBox.TabIndex = 63;
             // 
@@ -768,6 +783,7 @@
             this.origBytesPerSecondTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origBytesPerSecondTextBox.Location = new System.Drawing.Point(428, 387);
             this.origBytesPerSecondTextBox.Name = "origBytesPerSecondTextBox";
+            this.origBytesPerSecondTextBox.ReadOnly = true;
             this.origBytesPerSecondTextBox.Size = new System.Drawing.Size(129, 21);
             this.origBytesPerSecondTextBox.TabIndex = 60;
             // 
@@ -786,6 +802,7 @@
             this.origBlockAllignTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origBlockAllignTextBox.Location = new System.Drawing.Point(428, 338);
             this.origBlockAllignTextBox.Name = "origBlockAllignTextBox";
+            this.origBlockAllignTextBox.ReadOnly = true;
             this.origBlockAllignTextBox.Size = new System.Drawing.Size(131, 21);
             this.origBlockAllignTextBox.TabIndex = 58;
             // 
@@ -804,6 +821,7 @@
             this.origFChunkSizeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origFChunkSizeTextBox.Location = new System.Drawing.Point(428, 291);
             this.origFChunkSizeTextBox.Name = "origFChunkSizeTextBox";
+            this.origFChunkSizeTextBox.ReadOnly = true;
             this.origFChunkSizeTextBox.Size = new System.Drawing.Size(131, 21);
             this.origFChunkSizeTextBox.TabIndex = 56;
             // 
@@ -833,6 +851,7 @@
             this.decryptAudioTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.decryptAudioTextBox.Location = new System.Drawing.Point(1022, 545);
             this.decryptAudioTextBox.Name = "decryptAudioTextBox";
+            this.decryptAudioTextBox.ReadOnly = true;
             this.decryptAudioTextBox.Size = new System.Drawing.Size(317, 119);
             this.decryptAudioTextBox.TabIndex = 53;
             this.decryptAudioTextBox.Text = "";
@@ -852,6 +871,7 @@
             this.origDataStartPosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origDataStartPosTextBox.Location = new System.Drawing.Point(428, 238);
             this.origDataStartPosTextBox.Name = "origDataStartPosTextBox";
+            this.origDataStartPosTextBox.ReadOnly = true;
             this.origDataStartPosTextBox.Size = new System.Drawing.Size(131, 21);
             this.origDataStartPosTextBox.TabIndex = 51;
             // 
@@ -870,6 +890,7 @@
             this.creationalAudioTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.creationalAudioTextBox.Location = new System.Drawing.Point(169, 694);
             this.creationalAudioTextBox.Name = "creationalAudioTextBox";
+            this.creationalAudioTextBox.ReadOnly = true;
             this.creationalAudioTextBox.Size = new System.Drawing.Size(264, 21);
             this.creationalAudioTextBox.TabIndex = 49;
             // 
@@ -918,6 +939,7 @@
             this.origDChunkSizeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origDChunkSizeTextBox.Location = new System.Drawing.Point(429, 187);
             this.origDChunkSizeTextBox.Name = "origDChunkSizeTextBox";
+            this.origDChunkSizeTextBox.ReadOnly = true;
             this.origDChunkSizeTextBox.Size = new System.Drawing.Size(130, 21);
             this.origDChunkSizeTextBox.TabIndex = 44;
             // 
@@ -956,6 +978,7 @@
             this.origBitPerSampleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origBitPerSampleTextBox.Location = new System.Drawing.Point(430, 143);
             this.origBitPerSampleTextBox.Name = "origBitPerSampleTextBox";
+            this.origBitPerSampleTextBox.ReadOnly = true;
             this.origBitPerSampleTextBox.Size = new System.Drawing.Size(129, 21);
             this.origBitPerSampleTextBox.TabIndex = 40;
             // 
@@ -964,6 +987,7 @@
             this.origChannelsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origChannelsTextBox.Location = new System.Drawing.Point(430, 101);
             this.origChannelsTextBox.Name = "origChannelsTextBox";
+            this.origChannelsTextBox.ReadOnly = true;
             this.origChannelsTextBox.Size = new System.Drawing.Size(130, 21);
             this.origChannelsTextBox.TabIndex = 39;
             // 
@@ -972,6 +996,7 @@
             this.origSampleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origSampleTextBox.Location = new System.Drawing.Point(430, 57);
             this.origSampleTextBox.Name = "origSampleTextBox";
+            this.origSampleTextBox.ReadOnly = true;
             this.origSampleTextBox.Size = new System.Drawing.Size(131, 21);
             this.origSampleTextBox.TabIndex = 38;
             // 
@@ -980,6 +1005,7 @@
             this.origAudioFileTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.origAudioFileTextBox.Location = new System.Drawing.Point(20, 113);
             this.origAudioFileTextBox.Name = "origAudioFileTextBox";
+            this.origAudioFileTextBox.ReadOnly = true;
             this.origAudioFileTextBox.Size = new System.Drawing.Size(247, 21);
             this.origAudioFileTextBox.TabIndex = 37;
             // 
@@ -997,13 +1023,14 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage3.Controls.Add(this.clearDecryptTextButton);
             this.tabPage3.Controls.Add(this.decryptVideoButton);
             this.tabPage3.Controls.Add(this.label34);
             this.tabPage3.Controls.Add(this.decryptVideoTextBox);
             this.tabPage3.Controls.Add(this.clearEncryptVideoTextButton);
             this.tabPage3.Controls.Add(this.encryptTextInVideoButton);
             this.tabPage3.Controls.Add(this.label33);
-            this.tabPage3.Controls.Add(this.richTextBox1);
+            this.tabPage3.Controls.Add(this.encryptTextVideoTextBox);
             this.tabPage3.Controls.Add(this.openModVideoFileButton);
             this.tabPage3.Controls.Add(this.openOrigVideoFileButton);
             this.tabPage3.Controls.Add(this.label32);
@@ -1022,6 +1049,44 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "VideoStego";
             // 
+            // clearDecryptTextButton
+            // 
+            this.clearDecryptTextButton.Location = new System.Drawing.Point(1259, 669);
+            this.clearDecryptTextButton.Name = "clearDecryptTextButton";
+            this.clearDecryptTextButton.Size = new System.Drawing.Size(103, 49);
+            this.clearDecryptTextButton.TabIndex = 17;
+            this.clearDecryptTextButton.Text = "Очистить";
+            this.clearDecryptTextButton.UseVisualStyleBackColor = true;
+            this.clearDecryptTextButton.Click += new System.EventHandler(this.clearDecryptTextButton_Click_1);
+            // 
+            // decryptVideoButton
+            // 
+            this.decryptVideoButton.Location = new System.Drawing.Point(1259, 511);
+            this.decryptVideoButton.Name = "decryptVideoButton";
+            this.decryptVideoButton.Size = new System.Drawing.Size(103, 49);
+            this.decryptVideoButton.TabIndex = 16;
+            this.decryptVideoButton.Text = "Извлечь сообщение";
+            this.decryptVideoButton.UseVisualStyleBackColor = true;
+            this.decryptVideoButton.Click += new System.EventHandler(this.decryptVideoButton_Click);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(728, 492);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(198, 16);
+            this.label34.TabIndex = 15;
+            this.label34.Text = "Извлеченное сообщение:";
+            // 
+            // decryptVideoTextBox
+            // 
+            this.decryptVideoTextBox.Location = new System.Drawing.Point(728, 511);
+            this.decryptVideoTextBox.Name = "decryptVideoTextBox";
+            this.decryptVideoTextBox.ReadOnly = true;
+            this.decryptVideoTextBox.Size = new System.Drawing.Size(525, 207);
+            this.decryptVideoTextBox.TabIndex = 14;
+            this.decryptVideoTextBox.Text = "";
+            // 
             // clearEncryptVideoTextButton
             // 
             this.clearEncryptVideoTextButton.Location = new System.Drawing.Point(510, 676);
@@ -1030,6 +1095,7 @@
             this.clearEncryptVideoTextButton.TabIndex = 13;
             this.clearEncryptVideoTextButton.Text = "Очистить";
             this.clearEncryptVideoTextButton.UseVisualStyleBackColor = true;
+            this.clearEncryptVideoTextButton.Click += new System.EventHandler(this.clearEncryptVideoTextButton_Click);
             // 
             // encryptTextInVideoButton
             // 
@@ -1050,13 +1116,13 @@
             this.label33.TabIndex = 11;
             this.label33.Text = "Введите сообщение для внедрения: ";
             // 
-            // richTextBox1
+            // encryptTextVideoTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(28, 511);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(476, 214);
-            this.richTextBox1.TabIndex = 10;
-            this.richTextBox1.Text = "";
+            this.encryptTextVideoTextBox.Location = new System.Drawing.Point(28, 511);
+            this.encryptTextVideoTextBox.Name = "encryptTextVideoTextBox";
+            this.encryptTextVideoTextBox.Size = new System.Drawing.Size(476, 214);
+            this.encryptTextVideoTextBox.TabIndex = 10;
+            this.encryptTextVideoTextBox.Text = "";
             // 
             // openModVideoFileButton
             // 
@@ -1120,6 +1186,7 @@
             // 
             this.modVideoFileTextBox.Location = new System.Drawing.Point(863, 347);
             this.modVideoFileTextBox.Name = "modVideoFileTextBox";
+            this.modVideoFileTextBox.ReadOnly = true;
             this.modVideoFileTextBox.Size = new System.Drawing.Size(302, 22);
             this.modVideoFileTextBox.TabIndex = 3;
             // 
@@ -1127,6 +1194,7 @@
             // 
             this.origVideoFileTextBox.Location = new System.Drawing.Point(164, 341);
             this.origVideoFileTextBox.Name = "origVideoFileTextBox";
+            this.origVideoFileTextBox.ReadOnly = true;
             this.origVideoFileTextBox.Size = new System.Drawing.Size(288, 22);
             this.origVideoFileTextBox.TabIndex = 2;
             // 
@@ -1147,33 +1215,6 @@
             this.origVideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("origVideoPlayer.OcxState")));
             this.origVideoPlayer.Size = new System.Drawing.Size(424, 294);
             this.origVideoPlayer.TabIndex = 0;
-            // 
-            // decryptVideoTextBox
-            // 
-            this.decryptVideoTextBox.Location = new System.Drawing.Point(728, 511);
-            this.decryptVideoTextBox.Name = "decryptVideoTextBox";
-            this.decryptVideoTextBox.Size = new System.Drawing.Size(525, 207);
-            this.decryptVideoTextBox.TabIndex = 14;
-            this.decryptVideoTextBox.Text = "";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(728, 492);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(198, 16);
-            this.label34.TabIndex = 15;
-            this.label34.Text = "Извлеченное сообщение:";
-            // 
-            // decryptVideoButton
-            // 
-            this.decryptVideoButton.Location = new System.Drawing.Point(1259, 511);
-            this.decryptVideoButton.Name = "decryptVideoButton";
-            this.decryptVideoButton.Size = new System.Drawing.Size(103, 49);
-            this.decryptVideoButton.TabIndex = 16;
-            this.decryptVideoButton.Text = "Извлечь сообщение";
-            this.decryptVideoButton.UseVisualStyleBackColor = true;
-            this.decryptVideoButton.Click += new System.EventHandler(this.decryptVideoButton_Click);
             // 
             // MultiStegoForm
             // 
@@ -1298,12 +1339,13 @@
         private System.Windows.Forms.Button openModVideoFileButton;
         private System.Windows.Forms.Button openOrigVideoFileButton;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox encryptTextVideoTextBox;
         private System.Windows.Forms.Button clearEncryptVideoTextButton;
         private System.Windows.Forms.Button encryptTextInVideoButton;
         private System.Windows.Forms.Button decryptVideoButton;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.RichTextBox decryptVideoTextBox;
+        private System.Windows.Forms.Button clearDecryptTextButton;
     }
 }
 

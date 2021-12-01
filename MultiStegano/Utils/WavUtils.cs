@@ -184,6 +184,8 @@ namespace MultiStegano.Utils
             return decodeMessage;
         }
 
+        // после извлечения аудио из контейнера, происходит смещение на 2 байта по сравнению с исходным файлом.
+        // для этого отдельный метод для извлечения из видео
         public static string DecryptFromVideoFile(WavFile file, String path)
         {
             byte DataPos = file.dataStartPos;
@@ -197,7 +199,7 @@ namespace MultiStegano.Utils
             int lenstep = 0;
             int offlen = 6;
             // вытаскиваем длинну нашего сообщения
-            for (int i = DataPos +3; i < DataPos + 19; i = i + 4)
+            for (int i = DataPos + 3; i < DataPos + 19; i = i + 4)
             {
                 offlen = 6;
                 int multy = 192;

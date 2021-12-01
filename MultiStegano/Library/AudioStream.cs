@@ -24,12 +24,8 @@ namespace MultiStegano.Library
             get { return waveFormat.nChannels; }
         }
 
-        /// <summary>the stream's format</summary>
         private Avi.PCMWAVEFORMAT waveFormat = new Avi.PCMWAVEFORMAT();
 
-        /// <summary>Initialize an AudioStream for an existing stream</summary>
-        /// <param name="aviFile">The file that contains the stream</param>
-        /// <param name="aviStream">An IAVISTREAM from [aviFile]</param>
         public AudioStream(int aviFile, IntPtr aviStream)
         {
             this.aviFile = aviFile;
@@ -40,9 +36,6 @@ namespace MultiStegano.Library
             Avi.AVISTREAMINFO streamInfo = GetStreamInfo(aviStream);
         }
 
-        /// <summary>Read the stream's header information</summary>
-        /// <param name="aviStream">The IAVISTREAM to read from</param>
-        /// <returns>AVISTREAMINFO</returns>
         private Avi.AVISTREAMINFO GetStreamInfo(IntPtr aviStream)
         {
             Avi.AVISTREAMINFO streamInfo = new Avi.AVISTREAMINFO();
@@ -54,8 +47,6 @@ namespace MultiStegano.Library
             return streamInfo;
         }
 
-        /// <summary>Read the stream's header information</summary>
-        /// <returns>AVISTREAMINFO</returns>
         public Avi.AVISTREAMINFO GetStreamInfo()
         {
             if (writeCompressed)
@@ -68,8 +59,6 @@ namespace MultiStegano.Library
             }
         }
 
-        /// <summary>Read the stream's format information</summary>
-        /// <returns>PCMWAVEFORMAT</returns>
         public Avi.PCMWAVEFORMAT GetFormat()
         {
             Avi.PCMWAVEFORMAT format = new Avi.PCMWAVEFORMAT();
@@ -78,18 +67,11 @@ namespace MultiStegano.Library
             return format;
         }
 
-        /// <summary>Returns all data needed to copy the stream</summary>
-        /// <remarks>Do not forget to call Marshal.FreeHGlobal and release the raw data pointer</remarks>
-        /// <param name="streamInfo">Receives the header information</param>
-        /// <param name="format">Receives the format</param>
-        /// <param name="streamLength">Receives the length of the stream</param>
-        /// <returns>Pointer to the wave data</returns>
         public IntPtr GetStreamData(ref Avi.AVISTREAMINFO streamInfo, ref Avi.PCMWAVEFORMAT format, ref int streamLength)
         {
             streamInfo = GetStreamInfo();
 
             format = GetFormat();
-            //length in bytes = length in samples * length of a sample
             streamLength = Avi.AVIStreamLength(aviStream.ToInt32()) * streamInfo.dwSampleSize;
             IntPtr waveData = Marshal.AllocHGlobal(streamLength);
 
@@ -102,8 +84,6 @@ namespace MultiStegano.Library
             return waveData;
         }
 
-        /// <summary>Copy the stream into a new file</summary>
-        /// <param name="fileName">Name of the new file</param>
         public override void ExportStream(String fileName)
         {
             Avi.AVICOMPRESSOPTIONS_CLASS opts = new Avi.AVICOMPRESSOPTIONS_CLASS();

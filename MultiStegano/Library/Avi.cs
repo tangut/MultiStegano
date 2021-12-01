@@ -19,7 +19,7 @@ namespace MultiStegano.Library
         }
 
         public static int RGBQUAD_SIZE = 4;
-        public static int PALETTE_SIZE = 4 * 256; //RGBQUAD * 256 colours
+        public static int PALETTE_SIZE = 4 * 256; 
 
         public static readonly int streamtypeVIDEO = mmioFOURCC('v', 'i', 'd', 's');
         public static readonly int streamtypeAUDIO = mmioFOURCC('a', 'u', 'd', 's');
@@ -31,19 +31,18 @@ namespace MultiStegano.Library
         public const int OF_READWRITE = 2;
         public const int OF_CREATE = 4096;
 
-        public const int BMP_MAGIC_COOKIE = 19778; //ascii string "BM"
+        public const int BMP_MAGIC_COOKIE = 19778; 
 
-        public const int AVICOMPRESSF_INTERLEAVE = 0x00000001;    // interleave
-        public const int AVICOMPRESSF_DATARATE = 0x00000002;    // use a data rate
-        public const int AVICOMPRESSF_KEYFRAMES = 0x00000004;    // use keyframes
-        public const int AVICOMPRESSF_VALID = 0x00000008;    // has valid data
+        public const int AVICOMPRESSF_INTERLEAVE = 0x00000001;    
+        public const int AVICOMPRESSF_DATARATE = 0x00000002;    
+        public const int AVICOMPRESSF_KEYFRAMES = 0x00000004;    
+        public const int AVICOMPRESSF_VALID = 0x00000008;    
         public const int AVIIF_KEYFRAME = 0x00000010;
 
-        public const UInt32 ICMF_CHOOSE_KEYFRAME = 0x0001;  // show KeyFrame Every box
-        public const UInt32 ICMF_CHOOSE_DATARATE = 0x0002;  // show DataRate box
-        public const UInt32 ICMF_CHOOSE_PREVIEW = 0x0004;	// allow expanded preview dialog
+        public const UInt32 ICMF_CHOOSE_KEYFRAME = 0x0001;  
+        public const UInt32 ICMF_CHOOSE_DATARATE = 0x0002; 
+        public const UInt32 ICMF_CHOOSE_PREVIEW = 0x0004;	
 
-        //macro mmioFOURCC
         public static Int32 mmioFOURCC(char ch0, char ch1, char ch2, char ch3)
         {
             return ((Int32)(byte)(ch0) | ((byte)(ch1) << 8) |
@@ -123,7 +122,7 @@ namespace MultiStegano.Library
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct BITMAPFILEHEADER
         {
-            public Int16 bfType; //"magic cookie" - must be "BM"
+            public Int16 bfType; 
             public Int32 bfSize;
             public Int16 bfReserved1;
             public Int16 bfReserved2;
@@ -154,9 +153,9 @@ namespace MultiStegano.Library
         {
             public UInt32 fccType;
             public UInt32 fccHandler;
-            public UInt32 dwKeyFrameEvery;  // only used with AVICOMRPESSF_KEYFRAMES
+            public UInt32 dwKeyFrameEvery;  
             public UInt32 dwQuality;
-            public UInt32 dwBytesPerSecond; // only used with AVICOMPRESSF_DATARATE
+            public UInt32 dwBytesPerSecond;
             public UInt32 dwFlags;
             public IntPtr lpFormat;
             public UInt32 cbFormat;
@@ -165,15 +164,14 @@ namespace MultiStegano.Library
             public UInt32 dwInterleaveEvery;
         }
 
-        /// <summary>AviSaveV needs a pointer to a pointer to an AVICOMPRESSOPTIONS structure</summary>
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public class AVICOMPRESSOPTIONS_CLASS
         {
             public UInt32 fccType;
             public UInt32 fccHandler;
-            public UInt32 dwKeyFrameEvery;  // only used with AVICOMRPESSF_KEYFRAMES
+            public UInt32 dwKeyFrameEvery; 
             public UInt32 dwQuality;
-            public UInt32 dwBytesPerSecond; // only used with AVICOMPRESSF_DATARATE
+            public UInt32 dwBytesPerSecond; 
             public UInt32 dwFlags;
             public IntPtr lpFormat;
             public UInt32 cbFormat;
@@ -202,11 +200,10 @@ namespace MultiStegano.Library
 
         #region method declarations
 
-        //Initialize the AVI library
+
         [DllImport("avifil32.dll")]
         public static extern void AVIFileInit();
 
-        //Open an AVI file
         [DllImport("avifil32.dll", PreserveSig = true)]
         public static extern int AVIFileOpen(
             ref int ppfile,
@@ -214,7 +211,7 @@ namespace MultiStegano.Library
             int uMode,
             int pclsidHandler);
 
-        //Get a stream from an open AVI file
+      
         [DllImport("avifil32.dll")]
         public static extern int AVIFileGetStream(
             int pfile,
@@ -222,48 +219,47 @@ namespace MultiStegano.Library
             int fccType,
             int lParam);
 
-        //Get the start position of a stream
         [DllImport("avifil32.dll", PreserveSig = true)]
         public static extern int AVIStreamStart(int pavi);
 
-        //Get the length of a stream in frames
+
         [DllImport("avifil32.dll", PreserveSig = true)]
         public static extern int AVIStreamLength(int pavi);
 
-        //Get information about an open stream
+   
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamInfo(
             IntPtr pAVIStream,
             ref AVISTREAMINFO psi,
             int lSize);
 
-        //Get a pointer to a GETFRAME object (returns 0 on error)
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamGetFrameOpen(
             IntPtr pAVIStream,
             ref BITMAPINFOHEADER bih);
 
-        //Get a pointer to a packed DIB (returns 0 on error)
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamGetFrame(
             int pGetFrameObj,
             int lPos);
 
-        //Create a new stream in an open AVI file
+
         [DllImport("avifil32.dll")]
         public static extern int AVIFileCreateStream(
             int pfile,
             out IntPtr ppavi,
             ref AVISTREAMINFO ptr_streaminfo);
 
-        //Create an editable stream
+
         [DllImport("avifil32.dll")]
         public static extern int CreateEditableStream(
             ref IntPtr ppsEditable,
             IntPtr psSource
         );
 
-        //Cut samples from an editable stream
+  
         [DllImport("avifil32.dll")]
         public static extern int EditStreamCut(
             IntPtr pStream,
@@ -272,7 +268,7 @@ namespace MultiStegano.Library
             ref IntPtr ppResult
         );
 
-        //Copy a part of an editable stream
+   
         [DllImport("avifil32.dll")]
         public static extern int EditStreamCopy(
             IntPtr pStream,
@@ -281,7 +277,7 @@ namespace MultiStegano.Library
             ref IntPtr ppResult
         );
 
-        //Paste an editable stream into another editable stream
+  
         [DllImport("avifil32.dll")]
         public static extern int EditStreamPaste(
             IntPtr pStream,
@@ -292,7 +288,7 @@ namespace MultiStegano.Library
             Int32 lLength
         );
 
-        //Change a stream's header values
+
         [DllImport("avifil32.dll")]
         public static extern int EditStreamSetInfo(
             IntPtr pStream,
@@ -307,62 +303,61 @@ namespace MultiStegano.Library
             ref IntPtr papStreams
         );
 
-        //Set the format for a new stream
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamSetFormat(
             IntPtr aviStream, Int32 lPos,
-            //ref BITMAPINFOHEADER lpFormat,
             ref BITMAPINFO lpFormat,
             Int32 cbFormat);
 
-        //Set the format for a new stream
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamSetFormat(
             IntPtr aviStream, Int32 lPos,
             ref PCMWAVEFORMAT lpFormat, Int32 cbFormat);
 
-        //Read the format for a stream
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamReadFormat(
             IntPtr aviStream, Int32 lPos,
             ref BITMAPINFO lpFormat, ref Int32 cbFormat
             );
 
-        //Read the size of the format for a stream
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamReadFormat(
             IntPtr aviStream, Int32 lPos,
             int empty, ref Int32 cbFormat
             );
 
-        //Read the format for a stream
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamReadFormat(
             IntPtr aviStream, Int32 lPos,
             ref PCMWAVEFORMAT lpFormat, ref Int32 cbFormat
             );
 
-        //Write a sample to a stream
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamWrite(
             IntPtr aviStream, Int32 lStart, Int32 lSamples,
             IntPtr lpBuffer, Int32 cbBuffer, Int32 dwFlags,
             Int32 dummy1, Int32 dummy2);
 
-        //Release the GETFRAME object
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamGetFrameClose(
             int pGetFrameObj);
 
-        //Release an open AVI stream
+
         [DllImport("avifil32.dll")]
         public static extern int AVIStreamRelease(IntPtr aviStream);
 
-        //Release an open AVI file
+
         [DllImport("avifil32.dll")]
         public static extern int AVIFileRelease(int pfile);
 
-        //Close the AVI library
+
         [DllImport("avifil32.dll")]
         public static extern void AVIFileExit();
 
