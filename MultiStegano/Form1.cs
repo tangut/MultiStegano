@@ -1,7 +1,10 @@
 ﻿using Accord.Video.FFMPEG;
 using FFMpegCore;
 using MultiStegano.Entities;
+using MultiStegano.Library;
 using MultiStegano.Utils;
+using NAudio.Lame;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -335,10 +338,28 @@ namespace MultiStegano
 
         #endregion Audio steganography
 
+        private void disableVideoButtons()
+        {
+            openModVideoFileButton.Enabled = false;
+            openOrigVideoFileButton.Enabled = false;
+            encryptTextInVideoButton.Enabled = false;
+            clearEncryptVideoTextButton.Enabled = false;
+            decryptVideoButton.Enabled = false;
+        }
+
+        private void enableVideoButtons()
+        {
+            openModVideoFileButton.Enabled = true;
+            openOrigVideoFileButton.Enabled = true;
+            encryptTextInVideoButton.Enabled = true;
+            clearEncryptVideoTextButton.Enabled = true;
+            decryptVideoButton.Enabled = true;
+        }
+
         private void openOrigVideoFileButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Video files (*.MP4)|*.mp4";
+            dialog.Filter = "Video files (*.AVI)|*.avi";
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -350,7 +371,7 @@ namespace MultiStegano
         private void openModVideoFileButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Video files (*.MP4)|*.mp4";
+            dialog.Filter = "Video files (*.AVI)|*.avi";
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -367,19 +388,30 @@ namespace MultiStegano
             long framecount = reader.FrameCount;
             double frameRate = reader.FrameRate.Value;
             int bitRate = reader.BitRate;
-            VideoCodec codecName = (VideoCodec)Enum.Parse(typeof(VideoCodec), reader.CodecName.ToUpper());
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "MP4 files (*.MP4)|*.mp4";
+            saveFileDialog.Filter = "AVI files (*.AVI)|*.avi";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 String path = saveFileDialog.FileName.ToString();
+                disableVideoButtons();
                 MessageBox.Show("Подождите, запись видеофайла выполняется!");
                 FFMpeg.ExtractAudio(origFile, "audio.mp3");
+                FileStream fileStream = new FileStream("audio.mp3", FileMode.Open);
+                using (var mp3Reader = new Mp3FileReader(fileStream))
+                {
+                    using (var waveWriter = new WaveFileWriter("audio.wav", mp3Reader.WaveFormat))
+                    {
+                        mp3Reader.CopyTo(waveWriter);
+                    }
+                }
+                fileStream.Dispose();
+                fileStream.Close();
+                WavFile wavFile = WavUtils.CreateWavFile("audio.wav");
+                WavUtils.WriteFile(wavFile, "audio.wav", "audio1.wav", "привет");
                 using (var writer = new VideoFileWriter())
                 {
                     Bitmap frame = reader.ReadVideoFrame();
-                    writer.Open("temp.mp4", frame.Width, frame.Height, (int)frameRate, VideoCodec.Default, bitRate);
-                    List<ImageInfo> list = new List<ImageInfo>();
+                    writer.Open("temp.avi", frame.Width, frame.Height, (int)frameRate, VideoCodec.Default, Int32.MaxValue);
                     for (int i = 0; i < framecount; i++)
                     {
                         writer.WriteVideoFrame(frame);
@@ -396,11 +428,26 @@ namespace MultiStegano
                     writer.Close();
                     reader.Close();
                 }
-                FFMpeg.ReplaceAudio("temp.mp4", "audio.mp3", path);
+                AviManager aviManager = new AviManager("temp.avi", true);
+                aviManager.AddAudioStream("audio1.wav", 0);
+                aviManager.Close();
                 File.Delete("audio.mp3");
-                File.Delete("temp.mp4");
+                File.Delete("audio.wav");
+                File.Delete("audio1.wav");
                 MessageBox.Show("Видеофайл записан!", "ОК", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                enableVideoButtons();
             }
+        }
+
+        private void decryptVideoButton_Click(object sender, EventArgs e)
+        {
+            AviManager aviManager = new AviManager("temp.avi", true);
+            Library.AudioStream audioStream = aviManager.GetWaveStream();
+            audioStream.ExportStream("audio2.wav");
+            WavFile wavFile = WavUtils.CreateWavFile("audio2.wav");
+            String text = WavUtils.DecryptFromVideoFile(wavFile, "audio2.wav");
+            decryptVideoTextBox.Text = text;
+            File.Delete("audio2.wav");
         }
     }
 }

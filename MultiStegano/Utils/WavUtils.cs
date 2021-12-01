@@ -160,19 +160,86 @@ namespace MultiStegano.Utils
             int offset;
             for (int i = DataPos + 17; i < DataPos + 17 + bufferLength; i = i + 4)
             {
-                offset = 6;
-                int multiply = 192;
+                try
+                {
+                    offset = 6;
+                    int multiply = 192;
+                    int output = 0;
+                    for (int k = 0; k < 4; k++)
+                    {
+                        int temp = source[i + k];
+                        temp = (temp << offset) & multiply;
+                        output = output | temp;
+                        multiply = multiply / 4;
+                        offset = offset - 2;
+                    }
+                    bufferOutput[step] = Convert.ToByte(output);
+                    step++;
+                } catch (Exception)
+                {
+                    break;
+                }
+            }
+            string decodeMessage = Encoding.UTF8.GetString(bufferOutput);
+            return decodeMessage;
+        }
+
+        public static string DecryptFromVideoFile(WavFile file, String path)
+        {
+            byte DataPos = file.dataStartPos;
+            byte[] source;
+            using (BinaryReader b = new BinaryReader(File.Open(path, FileMode.Open)))
+            {
+                int length = (int)b.BaseStream.Length;
+                source = b.ReadBytes(length);
+            }
+            byte[] bufferlen = new byte[4];
+            int lenstep = 0;
+            int offlen = 6;
+            // вытаскиваем длинну нашего сообщения
+            for (int i = DataPos +3; i < DataPos + 19; i = i + 4)
+            {
+                offlen = 6;
+                int multy = 192;
                 int output = 0;
                 for (int k = 0; k < 4; k++)
                 {
                     int temp = source[i + k];
-                    temp = (temp << offset) & multiply;
+                    temp = (temp << offlen) & multy;
                     output = output | temp;
-                    multiply = multiply / 4;
-                    offset = offset - 2;
+                    multy = multy / 4;
+                    offlen = offlen - 2;
                 }
-                bufferOutput[step] = Convert.ToByte(output);
-                step++;
+                bufferlen[lenstep] = Convert.ToByte(output);
+                lenstep++;
+            }
+            int bufferLength = BitConverter.ToInt32(bufferlen, 0);
+            byte[] bufferOutput = new byte[bufferLength / 4];
+            //извлекаем сообщение из бинарного потока
+            int step = 0;
+            int offset;
+            for (int i = DataPos + 19; i < DataPos + 19 + bufferLength; i = i + 4)
+            {
+                try
+                {
+                    offset = 6;
+                    int multiply = 192;
+                    int output = 0;
+                    for (int k = 0; k < 4; k++)
+                    {
+                        int temp = source[i + k];
+                        temp = (temp << offset) & multiply;
+                        output = output | temp;
+                        multiply = multiply / 4;
+                        offset = offset - 2;
+                    }
+                    bufferOutput[step] = Convert.ToByte(output);
+                    step++;
+                }
+                catch (Exception)
+                {
+                    break;
+                }
             }
             string decodeMessage = Encoding.UTF8.GetString(bufferOutput);
             return decodeMessage;
@@ -201,7 +268,7 @@ namespace MultiStegano.Utils
             }
             string str = "Номера измененных байтов данных в файле:";
             int step = 0;
-            for (int i = DataPos2 + 1; i < source2.Length; i++)
+            for (int i = DataPos2 + 1; i < source1.Length; i++)
             {
                 if (source2[i] != source1[i])
                 {
