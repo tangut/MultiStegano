@@ -1,10 +1,10 @@
 ﻿using Accord.Video.FFMPEG;
-using FFMpegCore;
 using MultiStegano.Entities;
 using MultiStegano.Library;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace MultiStegano.Utils
             long framecount = reader.FrameCount;
             double frameRate = reader.FrameRate.Value;
             int bitRate = reader.BitRate;
-            FFMpeg.ExtractAudio(origFile, "audio.mp3");
+            extractAudio(origFile, "audio.mp3");
             FileStream fileStream = new FileStream("audio.mp3", FileMode.Open);
             using (var mp3Reader = new Mp3FileReader(fileStream))
             {
@@ -75,6 +75,24 @@ namespace MultiStegano.Utils
             File.Delete("temp.avi");
             File.Delete("audio2.wav");
             return text;
+        }
+
+        public static void extractAudio(String inputFile, String outputFile)
+        {
+            var ffmpegProcess = new Process();
+            ffmpegProcess.StartInfo.UseShellExecute = false;
+            ffmpegProcess.StartInfo.RedirectStandardInput = true;
+            ffmpegProcess.StartInfo.RedirectStandardOutput = true;
+            ffmpegProcess.StartInfo.RedirectStandardError = true;
+            ffmpegProcess.StartInfo.CreateNoWindow = true;
+            ffmpegProcess.StartInfo.FileName = "ffmpeg.exe";
+            ffmpegProcess.StartInfo.Arguments = " -i " + inputFile + " -vn -f mp3 -ab 320k " + outputFile;
+            ffmpegProcess.Start();
+            ffmpegProcess.StandardOutput.ReadToEnd();
+            if (!ffmpegProcess.HasExited)
+            {
+                ffmpegProcess.Kill();
+            }
         }
     }
 }
