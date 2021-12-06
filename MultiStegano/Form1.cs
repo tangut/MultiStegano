@@ -190,12 +190,12 @@ namespace MultiStegano
                 }
                 if (engLangRadioButton.Checked)
                 {
-                    String ecnodedText = ImageUtils.DecodeEnglish(modImgPath.Text, LenghtTextBox.Text, color);
+                    String ecnodedText = ImageUtils.DecodeEnglish(modImgPath.Text, color);
                     imgEncryptTextBox.Text = "Дешифрованный текст: " + ecnodedText;
                 }
                 else
                 {
-                    String encodedText = ImageUtils.DecodeRussian(modImgPath.Text, LenghtTextBox.Text, color);
+                    String encodedText = ImageUtils.DecodeRussian(modImgPath.Text, color);
                     imgEncryptTextBox.Text = "Дешифрованный текст: " + encodedText;
                 }
                 break;

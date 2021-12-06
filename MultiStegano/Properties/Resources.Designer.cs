@@ -59,5 +59,25 @@ namespace MultiStegano.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Мона_Лиза {
+            get {
+                object obj = ResourceManager.GetObject("Мона Лиза", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Мона_Лиза_стегано {
+            get {
+                object obj = ResourceManager.GetObject("Мона Лиза стегано", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

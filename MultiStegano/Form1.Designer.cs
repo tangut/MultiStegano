@@ -31,12 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiStegoForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ImageStego = new System.Windows.Forms.TabPage();
-            this.label20 = new System.Windows.Forms.Label();
             this.encryptTextBoxClearButton = new System.Windows.Forms.Button();
             this.modImgPath = new System.Windows.Forms.TextBox();
             this.origImgPath = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.LenghtTextBox = new System.Windows.Forms.TextBox();
             this.colorBox = new System.Windows.Forms.GroupBox();
             this.redColorRadioButton = new System.Windows.Forms.RadioButton();
             this.greenColorRadioButton = new System.Windows.Forms.RadioButton();
@@ -54,6 +51,8 @@
             this.OpenOriginalImageButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.encodedPictureBox = new System.Windows.Forms.PictureBox();
+            this.originalPictureBox = new System.Windows.Forms.PictureBox();
             this.AudioStego = new System.Windows.Forms.TabPage();
             this.label21 = new System.Windows.Forms.Label();
             this.modBytesPerSecondTextBox = new System.Windows.Forms.TextBox();
@@ -126,18 +125,16 @@
             this.origVideoFileTextBox = new System.Windows.Forms.TextBox();
             this.modVideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.origVideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.encodedPictureBox = new System.Windows.Forms.PictureBox();
-            this.originalPictureBox = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.ImageStego.SuspendLayout();
             this.colorBox.SuspendLayout();
             this.langBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.encodedPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
             this.AudioStego.SuspendLayout();
             this.VideoStego.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modVideoPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.origVideoPlayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.encodedPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -155,12 +152,9 @@
             // ImageStego
             // 
             this.ImageStego.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ImageStego.Controls.Add(this.label20);
             this.ImageStego.Controls.Add(this.encryptTextBoxClearButton);
             this.ImageStego.Controls.Add(this.modImgPath);
             this.ImageStego.Controls.Add(this.origImgPath);
-            this.ImageStego.Controls.Add(this.label5);
-            this.ImageStego.Controls.Add(this.LenghtTextBox);
             this.ImageStego.Controls.Add(this.colorBox);
             this.ImageStego.Controls.Add(this.langBox);
             this.ImageStego.Controls.Add(this.DecodeButton);
@@ -180,16 +174,6 @@
             this.ImageStego.Size = new System.Drawing.Size(1393, 765);
             this.ImageStego.TabIndex = 0;
             this.ImageStego.Text = "Стеганография в изображении";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label20.Location = new System.Drawing.Point(765, 628);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(110, 18);
-            this.label20.TabIndex = 33;
-            this.label20.Text = "(опционально)";
             // 
             // encryptTextBoxClearButton
             // 
@@ -222,30 +206,13 @@
             this.origImgPath.TabIndex = 30;
             this.origImgPath.Text = "Путь к оригинальному файлу";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(705, 646);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(259, 18);
-            this.label5.TabIndex = 29;
-            this.label5.Text = "Предполагаемая длина сообщения:";
-            // 
-            // LenghtTextBox
-            // 
-            this.LenghtTextBox.Location = new System.Drawing.Point(708, 668);
-            this.LenghtTextBox.Name = "LenghtTextBox";
-            this.LenghtTextBox.Size = new System.Drawing.Size(256, 20);
-            this.LenghtTextBox.TabIndex = 28;
-            // 
             // colorBox
             // 
             this.colorBox.Controls.Add(this.redColorRadioButton);
             this.colorBox.Controls.Add(this.greenColorRadioButton);
             this.colorBox.Controls.Add(this.blueColorRadioButton);
             this.colorBox.Controls.Add(this.label4);
-            this.colorBox.Location = new System.Drawing.Point(1140, 628);
+            this.colorBox.Location = new System.Drawing.Point(1077, 647);
             this.colorBox.Name = "colorBox";
             this.colorBox.Size = new System.Drawing.Size(197, 99);
             this.colorBox.TabIndex = 27;
@@ -308,7 +275,7 @@
             this.langBox.Controls.Add(this.russianLangRadioButton);
             this.langBox.Controls.Add(this.engLangRadioButton);
             this.langBox.Controls.Add(this.label7);
-            this.langBox.Location = new System.Drawing.Point(983, 646);
+            this.langBox.Location = new System.Drawing.Point(852, 665);
             this.langBox.Name = "langBox";
             this.langBox.Size = new System.Drawing.Size(151, 81);
             this.langBox.TabIndex = 26;
@@ -432,6 +399,26 @@
             this.label1.Size = new System.Drawing.Size(274, 24);
             this.label1.TabIndex = 2;
             this.label1.Text = "Оригинальное изображение:";
+            // 
+            // encodedPictureBox
+            // 
+            this.encodedPictureBox.BackgroundImage = global::MultiStegano.Properties.Resources.Мона_Лиза_стегано;
+            this.encodedPictureBox.Location = new System.Drawing.Point(657, 33);
+            this.encodedPictureBox.Name = "encodedPictureBox";
+            this.encodedPictureBox.Size = new System.Drawing.Size(617, 513);
+            this.encodedPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.encodedPictureBox.TabIndex = 1;
+            this.encodedPictureBox.TabStop = false;
+            // 
+            // originalPictureBox
+            // 
+            this.originalPictureBox.BackgroundImage = global::MultiStegano.Properties.Resources.Мона_Лиза;
+            this.originalPictureBox.Location = new System.Drawing.Point(20, 33);
+            this.originalPictureBox.Name = "originalPictureBox";
+            this.originalPictureBox.Size = new System.Drawing.Size(599, 513);
+            this.originalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.originalPictureBox.TabIndex = 0;
+            this.originalPictureBox.TabStop = false;
             // 
             // AudioStego
             // 
@@ -1196,26 +1183,6 @@
             this.origVideoPlayer.Size = new System.Drawing.Size(424, 294);
             this.origVideoPlayer.TabIndex = 0;
             // 
-            // encodedPictureBox
-            // 
-            this.encodedPictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("encodedPictureBox.BackgroundImage")));
-            this.encodedPictureBox.Location = new System.Drawing.Point(657, 33);
-            this.encodedPictureBox.Name = "encodedPictureBox";
-            this.encodedPictureBox.Size = new System.Drawing.Size(617, 513);
-            this.encodedPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.encodedPictureBox.TabIndex = 1;
-            this.encodedPictureBox.TabStop = false;
-            // 
-            // originalPictureBox
-            // 
-            this.originalPictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("originalPictureBox.BackgroundImage")));
-            this.originalPictureBox.Location = new System.Drawing.Point(20, 33);
-            this.originalPictureBox.Name = "originalPictureBox";
-            this.originalPictureBox.Size = new System.Drawing.Size(599, 513);
-            this.originalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.originalPictureBox.TabIndex = 0;
-            this.originalPictureBox.TabStop = false;
-            // 
             // MultiStegoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1234,14 +1201,14 @@
             this.colorBox.PerformLayout();
             this.langBox.ResumeLayout(false);
             this.langBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.encodedPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).EndInit();
             this.AudioStego.ResumeLayout(false);
             this.AudioStego.PerformLayout();
             this.VideoStego.ResumeLayout(false);
             this.VideoStego.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modVideoPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.origVideoPlayer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.encodedPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1271,8 +1238,6 @@
         private System.Windows.Forms.RadioButton engLangRadioButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox LenghtTextBox;
         private System.Windows.Forms.TextBox modImgPath;
         private System.Windows.Forms.TextBox origImgPath;
         private System.Windows.Forms.Button encryptTextBoxClearButton;
@@ -1310,7 +1275,6 @@
         private System.Windows.Forms.TextBox origSampleTextBox;
         private System.Windows.Forms.TextBox origAudioFileTextBox;
         private System.Windows.Forms.Button origAudioFileButton;
-        private System.Windows.Forms.Label label20;
         private AxWMPLib.AxWindowsMediaPlayer origVideoPlayer;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox modBytesPerSecondTextBox;

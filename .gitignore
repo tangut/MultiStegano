@@ -259,8 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/rebel-theme.wav
-/imperial_march.wav
-/123.wav
-/321.wav
-/testVideo.mp4
+*.wav
+*.png
+*.avi
+

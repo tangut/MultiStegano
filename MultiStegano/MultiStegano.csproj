@@ -211,6 +211,18 @@
   <ItemGroup>
     <None Include="Resources\123.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\кот.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Мона Лиза.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Мона Лиза стегано.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Accord.3.8.0\build\Accord.targets" Condition="Exists('..\packages\Accord.3.8.0\build\Accord.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
