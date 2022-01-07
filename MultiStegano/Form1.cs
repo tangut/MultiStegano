@@ -1,5 +1,4 @@
 ﻿using Accord.Video.FFMPEG;
-using FFMpegCore;
 using MultiStegano.Entities;
 using MultiStegano.Library;
 using MultiStegano.Utils;
@@ -27,7 +26,6 @@ namespace MultiStegano
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
-            GlobalFFOptions.Configure(new FFOptions { BinaryFolder = "./FFMPEG", TemporaryFilesFolder = "./FFMPEG" });
             InitializeComponent();
         }
 
@@ -338,10 +336,15 @@ namespace MultiStegano
 
         #endregion Audio steganography
 
+        #region VideoSteganography
         private void disableVideoButtons()
         {
             openModVideoFileButton.Enabled = false;
             openOrigVideoFileButton.Enabled = false;
+            openModVideoFileButtonV2.Enabled = false;
+            openOrigVideoFileButtonV2.Enabled = false;
+            encrypFileVideoButton.Enabled = false;
+            decryptFileVideoButton.Enabled = false;
             encryptTextInVideoButton.Enabled = false;
             clearEncryptVideoTextButton.Enabled = false;
             decryptVideoButton.Enabled = false;
@@ -354,6 +357,10 @@ namespace MultiStegano
             encryptTextInVideoButton.Enabled = true;
             clearEncryptVideoTextButton.Enabled = true;
             decryptVideoButton.Enabled = true;
+            openModVideoFileButtonV2.Enabled = true;
+            openOrigVideoFileButtonV2.Enabled = true;
+            encrypFileVideoButton.Enabled = true;
+            decryptFileVideoButton.Enabled = true;
         }
 
         private void openOrigVideoFileButton_Click(object sender, EventArgs e)
@@ -439,6 +446,92 @@ namespace MultiStegano
         private void clearEncryptVideoTextButton_Click(object sender, EventArgs e)
         {
             encryptTextVideoTextBox.Clear();
+        }
+        #endregion VideoSteganography
+
+        private void openOrigVideoFileButtonV2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Video files (*.AVI)|*.avi";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                origVideoPlayerVer2.URL = dialog.FileName.ToString();
+                origVideoFileTextBoxVer2.Text = dialog.FileName.ToString();
+            }
+        }
+
+        private void openModVideoFileButtonV2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Video files (*.AVI)|*.avi";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                modVideoPlayerVer2.URL = dialog.FileName.ToString();
+                modVideoFileTextBoxVer2.Text = dialog.FileName.ToString();
+            }
+        }
+
+        private void encrypFileVideoButton_Click(object sender, EventArgs e)
+        {
+            while (true)
+            {
+                if (origVideoFileTextBoxVer2.Text == modVideoFileTextBoxVer2.Text)
+                {
+                    MessageBox.Show("Нельзя выбирать файл, который проигрывается во втором плеере!", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+
+                if (origVideoFileTextBoxVer2.Text == "")
+                {
+                    MessageBox.Show("Сначала нужно выбрать оригинальный avi файл.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                String origFile = origVideoFileTextBoxVer2.Text;
+                String file;
+                OpenFileDialog dialog = new OpenFileDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    file = dialog.FileName.ToString();
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "AVI files (*.AVI)|*.avi";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        String outputFile = saveFileDialog.FileName.ToString();
+                        disableVideoButtons();
+                        MessageBox.Show("Подождите, запись видеофайла выполняется!");
+                        VideoUtils.EncryptFileInAudio(origFile, outputFile, file);
+                        MessageBox.Show("Видеофайл записан!", "ОК", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        enableVideoButtons();
+                    }
+                }
+                break;
+            }
+        }
+
+        private void decryptFileVideoButton_Click(object sender, EventArgs e)
+        {
+            while (true)
+            {
+                if (modVideoFileTextBoxVer2.Text == "")
+                {
+                    MessageBox.Show("Сначала нужно выбрать измененный avi файл.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                String modFile = modVideoFileTextBoxVer2.Text;
+                byte[] result = VideoUtils.DecryptFileFromAudio(modFile);
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (BinaryWriter writer = new BinaryWriter(File.Open(saveFileDialog.FileName.ToString(), FileMode.OpenOrCreate)))
+                    {
+                        writer.Write(result);
+                        MessageBox.Show("Файл извлечен и записан!");
+                    }                 
+                }
+                break;
+            }
         }
     }
 }

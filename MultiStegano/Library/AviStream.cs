@@ -36,7 +36,5 @@ namespace MultiStegano.Library
             }
             Avi.AVIStreamRelease(StreamPointer);
         }
-
-		public abstract void ExportStream(String fileName);
     }
 }

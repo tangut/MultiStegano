@@ -125,6 +125,19 @@
             this.origVideoFileTextBox = new System.Windows.Forms.TextBox();
             this.modVideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.origVideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.FileVideoStego = new System.Windows.Forms.TabPage();
+            this.openModVideoFileButtonV2 = new System.Windows.Forms.Button();
+            this.openOrigVideoFileButtonV2 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.modVideoFileTextBoxVer2 = new System.Windows.Forms.TextBox();
+            this.origVideoFileTextBoxVer2 = new System.Windows.Forms.TextBox();
+            this.modVideoPlayerVer2 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.origVideoPlayerVer2 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.encrypFileVideoButton = new System.Windows.Forms.Button();
+            this.decryptFileVideoButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ImageStego.SuspendLayout();
             this.colorBox.SuspendLayout();
@@ -135,6 +148,9 @@
             this.VideoStego.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modVideoPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.origVideoPlayer)).BeginInit();
+            this.FileVideoStego.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modVideoPlayerVer2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.origVideoPlayerVer2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -142,6 +158,7 @@
             this.tabControl1.Controls.Add(this.ImageStego);
             this.tabControl1.Controls.Add(this.AudioStego);
             this.tabControl1.Controls.Add(this.VideoStego);
+            this.tabControl1.Controls.Add(this.FileVideoStego);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl1.Location = new System.Drawing.Point(-5, 5);
             this.tabControl1.Name = "tabControl1";
@@ -173,7 +190,7 @@
             this.ImageStego.Padding = new System.Windows.Forms.Padding(3);
             this.ImageStego.Size = new System.Drawing.Size(1393, 765);
             this.ImageStego.TabIndex = 0;
-            this.ImageStego.Text = "Стеганография в изображении";
+            this.ImageStego.Text = "Изображение";
             // 
             // encryptTextBoxClearButton
             // 
@@ -480,7 +497,7 @@
             this.AudioStego.Padding = new System.Windows.Forms.Padding(3);
             this.AudioStego.Size = new System.Drawing.Size(1393, 765);
             this.AudioStego.TabIndex = 1;
-            this.AudioStego.Text = "Аудиостеганография";
+            this.AudioStego.Text = "Аудио";
             // 
             // label21
             // 
@@ -1014,7 +1031,7 @@
             this.VideoStego.Padding = new System.Windows.Forms.Padding(3);
             this.VideoStego.Size = new System.Drawing.Size(1393, 765);
             this.VideoStego.TabIndex = 2;
-            this.VideoStego.Text = "Видеостеганография";
+            this.VideoStego.Text = "Видео";
             // 
             // clearDecryptTextButton
             // 
@@ -1171,7 +1188,7 @@
             this.modVideoPlayer.Location = new System.Drawing.Point(717, 41);
             this.modVideoPlayer.Name = "modVideoPlayer";
             this.modVideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("modVideoPlayer.OcxState")));
-            this.modVideoPlayer.Size = new System.Drawing.Size(457, 303);
+            this.modVideoPlayer.Size = new System.Drawing.Size(457, 294);
             this.modVideoPlayer.TabIndex = 1;
             // 
             // origVideoPlayer
@@ -1182,6 +1199,147 @@
             this.origVideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("origVideoPlayer.OcxState")));
             this.origVideoPlayer.Size = new System.Drawing.Size(424, 294);
             this.origVideoPlayer.TabIndex = 0;
+            // 
+            // FileVideoStego
+            // 
+            this.FileVideoStego.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.FileVideoStego.Controls.Add(this.decryptFileVideoButton);
+            this.FileVideoStego.Controls.Add(this.encrypFileVideoButton);
+            this.FileVideoStego.Controls.Add(this.openModVideoFileButtonV2);
+            this.FileVideoStego.Controls.Add(this.openOrigVideoFileButtonV2);
+            this.FileVideoStego.Controls.Add(this.label5);
+            this.FileVideoStego.Controls.Add(this.label20);
+            this.FileVideoStego.Controls.Add(this.label35);
+            this.FileVideoStego.Controls.Add(this.label36);
+            this.FileVideoStego.Controls.Add(this.modVideoFileTextBoxVer2);
+            this.FileVideoStego.Controls.Add(this.origVideoFileTextBoxVer2);
+            this.FileVideoStego.Controls.Add(this.modVideoPlayerVer2);
+            this.FileVideoStego.Controls.Add(this.origVideoPlayerVer2);
+            this.FileVideoStego.Location = new System.Drawing.Point(4, 33);
+            this.FileVideoStego.Name = "FileVideoStego";
+            this.FileVideoStego.Size = new System.Drawing.Size(1393, 765);
+            this.FileVideoStego.TabIndex = 3;
+            this.FileVideoStego.Text = "Файл в видео";
+            // 
+            // openModVideoFileButtonV2
+            // 
+            this.openModVideoFileButtonV2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.openModVideoFileButtonV2.Location = new System.Drawing.Point(764, 500);
+            this.openModVideoFileButtonV2.Name = "openModVideoFileButtonV2";
+            this.openModVideoFileButtonV2.Size = new System.Drawing.Size(126, 59);
+            this.openModVideoFileButtonV2.TabIndex = 19;
+            this.openModVideoFileButtonV2.Text = "Открыть измененный файл";
+            this.openModVideoFileButtonV2.UseVisualStyleBackColor = true;
+            this.openModVideoFileButtonV2.Click += new System.EventHandler(this.openModVideoFileButtonV2_Click);
+            // 
+            // openOrigVideoFileButtonV2
+            // 
+            this.openOrigVideoFileButtonV2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.openOrigVideoFileButtonV2.Location = new System.Drawing.Point(75, 500);
+            this.openOrigVideoFileButtonV2.Name = "openOrigVideoFileButtonV2";
+            this.openOrigVideoFileButtonV2.Size = new System.Drawing.Size(123, 59);
+            this.openOrigVideoFileButtonV2.TabIndex = 18;
+            this.openOrigVideoFileButtonV2.Text = "Открыть оригинальный файл";
+            this.openOrigVideoFileButtonV2.UseVisualStyleBackColor = true;
+            this.openOrigVideoFileButtonV2.Click += new System.EventHandler(this.openOrigVideoFileButtonV2_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(760, 464);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(116, 20);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Путь к файлу:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label20.Location = new System.Drawing.Point(70, 457);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(116, 20);
+            this.label20.TabIndex = 16;
+            this.label20.Text = "Путь к файлу:";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label35.Location = new System.Drawing.Point(761, 136);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(154, 16);
+            this.label35.TabIndex = 15;
+            this.label35.Text = "Измененное видео:";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label36.Location = new System.Drawing.Point(71, 136);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(168, 16);
+            this.label36.TabIndex = 14;
+            this.label36.Text = "Оригинальное видео:";
+            // 
+            // modVideoFileTextBoxVer2
+            // 
+            this.modVideoFileTextBoxVer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modVideoFileTextBoxVer2.Location = new System.Drawing.Point(882, 464);
+            this.modVideoFileTextBoxVer2.Name = "modVideoFileTextBoxVer2";
+            this.modVideoFileTextBoxVer2.ReadOnly = true;
+            this.modVideoFileTextBoxVer2.Size = new System.Drawing.Size(302, 22);
+            this.modVideoFileTextBoxVer2.TabIndex = 13;
+            // 
+            // origVideoFileTextBoxVer2
+            // 
+            this.origVideoFileTextBoxVer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.origVideoFileTextBoxVer2.Location = new System.Drawing.Point(192, 455);
+            this.origVideoFileTextBoxVer2.Name = "origVideoFileTextBoxVer2";
+            this.origVideoFileTextBoxVer2.ReadOnly = true;
+            this.origVideoFileTextBoxVer2.Size = new System.Drawing.Size(288, 22);
+            this.origVideoFileTextBoxVer2.TabIndex = 12;
+            // 
+            // modVideoPlayerVer2
+            // 
+            this.modVideoPlayerVer2.Enabled = true;
+            this.modVideoPlayerVer2.Location = new System.Drawing.Point(764, 155);
+            this.modVideoPlayerVer2.Name = "modVideoPlayerVer2";
+            this.modVideoPlayerVer2.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("modVideoPlayerVer2.OcxState")));
+            this.modVideoPlayerVer2.Size = new System.Drawing.Size(457, 294);
+            this.modVideoPlayerVer2.TabIndex = 11;
+            // 
+            // origVideoPlayerVer2
+            // 
+            this.origVideoPlayerVer2.Enabled = true;
+            this.origVideoPlayerVer2.Location = new System.Drawing.Point(75, 155);
+            this.origVideoPlayerVer2.Name = "origVideoPlayerVer2";
+            this.origVideoPlayerVer2.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("origVideoPlayerVer2.OcxState")));
+            this.origVideoPlayerVer2.Size = new System.Drawing.Size(424, 294);
+            this.origVideoPlayerVer2.TabIndex = 10;
+            // 
+            // encrypFileVideoButton
+            // 
+            this.encrypFileVideoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.encrypFileVideoButton.Location = new System.Drawing.Point(359, 500);
+            this.encrypFileVideoButton.Name = "encrypFileVideoButton";
+            this.encrypFileVideoButton.Size = new System.Drawing.Size(140, 59);
+            this.encrypFileVideoButton.TabIndex = 20;
+            this.encrypFileVideoButton.Text = "Внедрить файл";
+            this.encrypFileVideoButton.UseVisualStyleBackColor = true;
+            this.encrypFileVideoButton.Click += new System.EventHandler(this.encrypFileVideoButton_Click);
+            // 
+            // decryptFileVideoButton
+            // 
+            this.decryptFileVideoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.decryptFileVideoButton.Location = new System.Drawing.Point(1081, 500);
+            this.decryptFileVideoButton.Name = "decryptFileVideoButton";
+            this.decryptFileVideoButton.Size = new System.Drawing.Size(140, 59);
+            this.decryptFileVideoButton.TabIndex = 21;
+            this.decryptFileVideoButton.Text = "Извлечь файл";
+            this.decryptFileVideoButton.UseVisualStyleBackColor = true;
+            this.decryptFileVideoButton.Click += new System.EventHandler(this.decryptFileVideoButton_Click);
             // 
             // MultiStegoForm
             // 
@@ -1209,6 +1367,10 @@
             this.VideoStego.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modVideoPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.origVideoPlayer)).EndInit();
+            this.FileVideoStego.ResumeLayout(false);
+            this.FileVideoStego.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modVideoPlayerVer2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.origVideoPlayerVer2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1311,6 +1473,19 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.RichTextBox decryptVideoTextBox;
         private System.Windows.Forms.Button clearDecryptTextButton;
+        private System.Windows.Forms.TabPage FileVideoStego;
+        private System.Windows.Forms.Button openModVideoFileButtonV2;
+        private System.Windows.Forms.Button openOrigVideoFileButtonV2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox modVideoFileTextBoxVer2;
+        private System.Windows.Forms.TextBox origVideoFileTextBoxVer2;
+        private AxWMPLib.AxWindowsMediaPlayer modVideoPlayerVer2;
+        private AxWMPLib.AxWindowsMediaPlayer origVideoPlayerVer2;
+        private System.Windows.Forms.Button decryptFileVideoButton;
+        private System.Windows.Forms.Button encrypFileVideoButton;
     }
 }
 

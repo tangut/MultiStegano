@@ -21,7 +21,7 @@ namespace MultiStegano.Library
             int result;
 
             if (open)
-            { //open existing file
+            {
 
                 result = Avi.AVIFileOpen(
                     ref aviFile, fileName,
@@ -29,7 +29,7 @@ namespace MultiStegano.Library
 
             }
             else
-            { //create empty file
+            {
 
                 result = Avi.AVIFileOpen(
                     ref aviFile, fileName,
@@ -48,7 +48,7 @@ namespace MultiStegano.Library
             this.aviFile = aviFile;
         }
 
-		public VideoStream GetVideoStream()
+        public VideoStream GetVideoStream()
         {
             IntPtr aviStream;
 
@@ -82,33 +82,6 @@ namespace MultiStegano.Library
             }
 
             AudioStream stream = new AudioStream(aviFile, aviStream);
-            streams.Add(stream);
-            return stream;
-        }
-
-        public VideoStream GetOpenStream(int index)
-        {
-            return (VideoStream)streams[index];
-        }
-
-        public VideoStream AddVideoStream(bool isCompressed, double frameRate, int frameSize, int width, int height, PixelFormat format)
-        {
-            VideoStream stream = new VideoStream(aviFile, isCompressed, frameRate, frameSize, width, height, format);
-            streams.Add(stream);
-            return stream;
-        }
-
-
-        public VideoStream AddVideoStream(Avi.AVICOMPRESSOPTIONS compressOptions, double frameRate, Bitmap firstFrame)
-        {
-            VideoStream stream = new VideoStream(aviFile, compressOptions, frameRate, firstFrame);
-            streams.Add(stream);
-            return stream;
-        }
-
-		public VideoStream AddVideoStream(bool isCompressed, double frameRate, Bitmap firstFrame)
-        {
-            VideoStream stream = new VideoStream(aviFile, isCompressed, frameRate, firstFrame);
             streams.Add(stream);
             return stream;
         }
@@ -218,66 +191,7 @@ namespace MultiStegano.Library
             }
         }
 
-        public AviManager CopyTo(String newFileName, float startAtSecond, float stopAtSecond)
-        {
-            AviManager newFile = new AviManager(newFileName, false);
-
-            try
-            {
-
-                VideoStream videoStream = GetVideoStream();
-
-                int startFrameIndex = (int)(videoStream.FrameRate * startAtSecond);
-                int stopFrameIndex = (int)(videoStream.FrameRate * stopAtSecond);
-
-                videoStream.GetFrameOpen();
-                Bitmap bmp = videoStream.GetBitmap(startFrameIndex);
-                VideoStream newStream = newFile.AddVideoStream(false, videoStream.FrameRate, bmp);
-                for (int n = startFrameIndex + 1; n <= stopFrameIndex; n++)
-                {
-                    bmp = videoStream.GetBitmap(n);
-                    newStream.AddFrame(bmp);
-                }
-                videoStream.GetFrameClose();
-
-
-                AudioStream waveStream = GetWaveStream();
-
-                Avi.AVISTREAMINFO streamInfo = new Avi.AVISTREAMINFO();
-                Avi.PCMWAVEFORMAT streamFormat = new Avi.PCMWAVEFORMAT();
-                int streamLength = 0;
-                IntPtr ptrRawData = waveStream.GetStreamData(
-                    ref streamInfo,
-                    ref streamFormat,
-                    ref streamLength);
-
-                int startByteIndex = (int)(startAtSecond * (float)(waveStream.CountSamplesPerSecond * streamFormat.nChannels * waveStream.CountBitsPerSample) / 8);
-                int stopByteIndex = (int)(stopAtSecond * (float)(waveStream.CountSamplesPerSecond * streamFormat.nChannels * waveStream.CountBitsPerSample) / 8);
-
-                IntPtr ptrWavePart = new IntPtr(ptrRawData.ToInt32() + startByteIndex);
-
-                byte[] rawData = new byte[stopByteIndex - startByteIndex];
-                Marshal.Copy(ptrWavePart, rawData, 0, rawData.Length);
-                Marshal.FreeHGlobal(ptrRawData);
-
-                streamInfo.dwLength = rawData.Length;
-                streamInfo.dwStart = 0;
-
-                IntPtr unmanagedRawData = Marshal.AllocHGlobal(rawData.Length);
-                Marshal.Copy(rawData, 0, unmanagedRawData, rawData.Length);
-                newFile.AddAudioStream(unmanagedRawData, streamInfo, streamFormat, rawData.Length);
-                Marshal.FreeHGlobal(unmanagedRawData);
-            }
-            catch (Exception ex)
-            {
-                newFile.Close();
-                throw ex;
-            }
-
-            return newFile;
-        }
-
-		public void Close()
+        public void Close()
         {
             foreach (AviStream stream in streams)
             {
@@ -286,21 +200,6 @@ namespace MultiStegano.Library
 
             Avi.AVIFileRelease(aviFile);
             Avi.AVIFileExit();
-        }
-
-        public static void MakeFileFromStream(String fileName, AviStream stream)
-        {
-            IntPtr newFile = IntPtr.Zero;
-            IntPtr streamPointer = stream.StreamPointer;
-
-            Avi.AVICOMPRESSOPTIONS_CLASS opts = new Avi.AVICOMPRESSOPTIONS_CLASS();
-            opts.fccType = (uint)Avi.streamtypeVIDEO;
-            opts.lpParms = IntPtr.Zero;
-            opts.lpFormat = IntPtr.Zero;
-            Avi.AVISaveOptions(IntPtr.Zero, Avi.ICMF_CHOOSE_KEYFRAME | Avi.ICMF_CHOOSE_DATARATE, 1, ref streamPointer, ref opts);
-            Avi.AVISaveOptionsFree(1, ref opts);
-
-            Avi.AVISaveV(fileName, 0, 0, 1, ref streamPointer, ref opts);
         }
     }
 }

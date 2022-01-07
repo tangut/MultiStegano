@@ -84,7 +84,7 @@ namespace MultiStegano.Library
             return waveData;
         }
 
-        public override void ExportStream(String fileName)
+        public void ExportStream(String fileName)
         {
             Avi.AVICOMPRESSOPTIONS_CLASS opts = new Avi.AVICOMPRESSOPTIONS_CLASS();
             opts.fccType = (UInt32)Avi.mmioStringToFOURCC("auds", 0);

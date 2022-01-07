@@ -123,6 +123,69 @@ namespace MultiStegano.Utils
                 MessageBox.Show($"Ошибка: {e.Message}", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        // метод записи нового файла из потока, с записью туда сообщения
+        public static void WriteBinaryFile(WavFile file, string oldpath, string path, byte[] bufferMessage)
+        {
+            byte DataPos = file.dataStartPos;
+            byte[] source;
+            using (BinaryReader b = new BinaryReader(File.Open(oldpath, FileMode.Open)))
+            {
+                int length = (int)b.BaseStream.Length;
+                source = b.ReadBytes(length);
+            }
+            int sourceLength = bufferMessage.Length * 4; // длина нашего сообщения
+            byte[] sourcelen = BitConverter.GetBytes(sourceLength);
+            int offlen = DataPos + 1;
+            // шифруем длину нашего сообщения в первые 16 байт дата части wav файла в каждые 2 младших бита
+            foreach (byte x in sourcelen)
+            {
+                int multy = 192;
+                for (int i = 6; i >= 0; i = i - 2)
+                {
+                    int output = (x & multy) >> i;
+                    multy = multy / 4;
+                    int temp = source[offlen] & 252;
+                    source[offlen] = Convert.ToByte(temp | output);
+                    offlen++;
+                }
+            }
+
+            int offset = offlen;
+            try
+            {
+                if (source.Length < bufferMessage.Length * 4 + DataPos + 16)
+                {
+                    throw new Exception("Длина сообщения больше длины файла");
+                }
+
+                // записываем в 2 младших бита байта источника два бита сообщения
+                foreach (byte x in bufferMessage)
+                {
+                    int multiply = 192;
+                    for (int i = 6; i >= 0; i = i - 2)
+                    {
+                        int output = (x & multiply) >> i;
+                        multiply = multiply / 4;
+                        int temp = source[offset] & 252;
+                        source[offset] = Convert.ToByte(temp | output);
+                        offset++;
+                    }
+                }
+                using (BinaryWriter b = new BinaryWriter(File.Open(path, FileMode.Create)))
+                {
+                    foreach (byte i in source)
+                    {
+                        b.Write(i);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Ошибка: {e.Message}", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         // дешифратор сообщения
         public static string DecryptFile(WavFile file, string path)
         {
@@ -245,6 +308,66 @@ namespace MultiStegano.Utils
             }
             string decodeMessage = Encoding.UTF8.GetString(bufferOutput);
             return decodeMessage;
+        }
+
+        public static byte[] DecryptFileFromVideoFile(WavFile file, String path)
+        {
+            byte DataPos = file.dataStartPos;
+            byte[] source;
+            using (BinaryReader b = new BinaryReader(File.Open(path, FileMode.Open)))
+            {
+                int length = (int)b.BaseStream.Length;
+                source = b.ReadBytes(length);
+            }
+            byte[] bufferlen = new byte[4];
+            int lenstep = 0;
+            int offlen = 6;
+            // вытаскиваем длинну нашего сообщения
+            for (int i = DataPos + 3; i < DataPos + 19; i = i + 4)
+            {
+                offlen = 6;
+                int multy = 192;
+                int output = 0;
+                for (int k = 0; k < 4; k++)
+                {
+                    int temp = source[i + k];
+                    temp = (temp << offlen) & multy;
+                    output = output | temp;
+                    multy = multy / 4;
+                    offlen = offlen - 2;
+                }
+                bufferlen[lenstep] = Convert.ToByte(output);
+                lenstep++;
+            }
+            int bufferLength = BitConverter.ToInt32(bufferlen, 0);
+            byte[] bufferOutput = new byte[bufferLength / 4];
+            //извлекаем сообщение из бинарного потока
+            int step = 0;
+            int offset;
+            for (int i = DataPos + 19; i < DataPos + 19 + bufferLength; i = i + 4)
+            {
+                try
+                {
+                    offset = 6;
+                    int multiply = 192;
+                    int output = 0;
+                    for (int k = 0; k < 4; k++)
+                    {
+                        int temp = source[i + k];
+                        temp = (temp << offset) & multiply;
+                        output = output | temp;
+                        multiply = multiply / 4;
+                        offset = offset - 2;
+                    }
+                    bufferOutput[step] = Convert.ToByte(output);
+                    step++;
+                }
+                catch (Exception)
+                {
+                    break;
+                }
+            }
+            return bufferOutput;
         }
 
         public static string Analyze(WavFile file1, WavFile file2, string path1, string path2)
